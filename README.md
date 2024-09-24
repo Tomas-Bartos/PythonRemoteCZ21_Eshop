@@ -17,7 +17,7 @@ Final Python projekt - E-shop
   -[ ] products
   -[ ] orders
   -[ ] vztahy mezi modely
-  -[ ] migrace
+  -[ ]migrace
 
 
 -[ ] Autentizace uživatelů:
@@ -26,4 +26,15 @@ Final Python projekt - E-shop
   -[ ] funkčnost odhlášení
   -[ ] resetování a obnova hesla
 
+-[ ] Admin prostředí
+  - [ ] správa kategorií a produktů
 
+-[ ] FrontEnd
+
+-[ ] Košík
+
+-[ ] Zpracování objednávek - formulář, fakturace
+
+-[ ] Počasí
+
+-[ ] Testing
