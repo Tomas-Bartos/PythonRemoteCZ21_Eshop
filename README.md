@@ -17,7 +17,7 @@ Final Python projekt - E-shop
   -[ ] products
   -[ ] orders
   -[ ] vztahy mezi modely
-  -[ ]migrace
+  -[ ] migrace
 
 
 -[ ] Autentizace uživatelů:
