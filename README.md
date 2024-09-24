@@ -1,3 +1,4 @@
+
 Final Python projekt - E-shop
 [ ] Vytvořit projekt:
   [ ] project
@@ -15,3 +16,8 @@ Final Python projekt - E-shop
   [ ] formulář s validací (minimální požadavky na jméno a znaky hesla?)
   [ ] funkčnost odhlášení
   [ ] resetování a obnova hesla
+======
+# PythonRemoteCZ21_Eshop
+FInal project for SDA academy python course. Tomas Brůžek and Tomáš Bartoš.
+Prvni push
+
