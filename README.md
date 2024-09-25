@@ -5,10 +5,10 @@ Prvni push
 <hr>
 
 Final Python projekt - E-shop
--[ ] Vytvořit projekt:
-  -[ ] project
-  -[ ] app
-  -[ ] database
+-[x] Vytvořit projekt:
+  -[x] project
+  -[x] app
+  -[x] database
 
 
 -[ ] Modely:
