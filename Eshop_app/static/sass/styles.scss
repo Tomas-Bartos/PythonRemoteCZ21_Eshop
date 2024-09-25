@@ -1,0 +1,17 @@
+// more about scss https://sass-lang.com/guide/
+
+// Body
+body {
+  margin: 0;
+  padding: 0;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// Fonts
+h1 {
+  font-size: 40px;
+  text-align: center;
+}
