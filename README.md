@@ -5,37 +5,37 @@ Prvni push
 <hr>
 
 Final Python projekt - E-shop
--[ ] Vytvořit projekt:
-  -[ ] project
-  -[ ] app
-  -[ ] database
+- [x] Vytvořit projekt:
+  - [x] project
+  - [x] app
+  - [x] database
 
 
--[ ] Modely:
-  -[ ] categories
-  -[ ] users
-  -[ ] products
-  -[ ] orders
-  -[ ] vztahy mezi modely
-  -[ ] migrace
+- [ ] Modely:
+  - [ ] categories
+  - [ ] users
+  - [ ] products
+  - [ ] orders
+  - [ ] vztahy mezi modely
+  - [ ] migrace
 
 
--[ ] Autentizace uživatelů:
-  -[ ] funkčnost registrace
-  -[ ] formulář s validací (minimální požadavky na jméno a znaky hesla?)
-  -[ ] funkčnost odhlášení
-  -[ ] resetování a obnova hesla
+- [ ] Autentizace uživatelů:
+  - [ ] funkčnost registrace
+  - [ ] formulář s validací (minimální požadavky na jméno a znaky hesla?)
+  - [ ] funkčnost odhlášení
+  - [ ] resetování a obnova hesla
 
 
--[ ] Admin prostředí
+- [ ] Admin prostředí
   - [ ] správa kategorií a produktů
 
 
--[ ] FrontEnd
--[ ] Košík
--[ ] Zpracování objednávek - formulář, fakturace
--[ ] Počasí
--[ ] Testing
+- [ ] FrontEnd
+- [ ] Košík
+- [ ] Zpracování objednávek - formulář, fakturace
+- [ ] Počasí
+- [ ] Testing
 
 <br>
 <hr>
