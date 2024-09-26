@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from django.contrib import admin
+from Eshop_app.models import Product, Category
+
+admin.site.register(Product)
+admin.site.register(Category)
 urlpatterns = [
     path('admin/', admin.site.urls),
     # include URLS from Eshop_app urls.py

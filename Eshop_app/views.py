@@ -6,6 +6,7 @@ from django.http import HttpResponse
 # request -> response
 # views are request handler
 
+from Eshop_app.models import Product
 
 # This function will render base.html page
 def base(request):
@@ -14,7 +15,10 @@ def base(request):
 
 # homepage
 def home_page(request):
-    return render(request, 'homepage.html')
+    return render(request, 'homepage.html',
+                  context={
+                      "all_products": Product.objects.all()
+                  })
 
 
 # cart

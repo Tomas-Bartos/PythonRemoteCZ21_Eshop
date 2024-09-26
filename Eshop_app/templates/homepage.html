@@ -6,4 +6,10 @@
 
 <h1>Vítejte na stránkách eshopu Ba-Br toto je naše domovská stránka</h1>
 
+<h3>Všechny produkty</h3>
+
+{% for produkt in all_products %}
+Produkt: {{produkt.name}}<br>
+{% endfor %}
+
 {% endblock %}
