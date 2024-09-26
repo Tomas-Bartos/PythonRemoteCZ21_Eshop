@@ -1,0 +1,15 @@
+<!-- Add everything from the base.htm to this page -->
+{% extends "base.html" %}
+
+<!-- Add everything inside of block content to the page structure  -->
+{% block content %}
+
+<h1>Vítejte na stránkách eshopu Ba-Br toto je naše domovská stránka</h1>
+
+<h3>Všechny produkty</h3>
+
+{% for produkt in all_products %}
+Produkt: {{produkt.name}}<br>
+{% endfor %}
+
+{% endblock %}
