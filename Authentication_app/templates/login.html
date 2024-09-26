@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Přihlášení</title>
+</head>
+<body>
+    <h2>Přihlášení</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Přihlásit se</button>
+        <a href="{% url 'password_reset' %}">Zapomněl jsem heslo</a>
+    </form>
+</body>
+</html>
