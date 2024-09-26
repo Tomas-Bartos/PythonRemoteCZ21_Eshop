@@ -15,7 +15,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(default="")
     # image_url = models.URLField(default="")
-    image_url = models.ImageField(upload_to='products/', blank=True, null=True)  # Ukládání obrázků do složky 'products/'
+    image_url = models.ImageField(upload_to='Eshop_app/static/products/', blank=True, null=True)  # Ukládání obrázků do složky 'products/'
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
 

@@ -10,11 +10,11 @@
 
 <!-- For loop to show all products -->
 {% for produkt in all_products %}
-
+{% load static %}
 <div class="product-container">
     <div class="product">
         <div class="product-category">{{product.category}}</div>
-        <div class="img"><img src="" alt=""></div>
+        <div class="img"><img src="{% static produkt.image_url %}" alt=""></div>
         <div class="title">{{produkt.name}}</div>
         <div class="description">{{produkt.description}}</div>
         <div class="price">{{produkt.price}}</div>
