@@ -8,8 +8,26 @@
 
 <h3>Všechny produkty</h3>
 
+<!-- For loop to show all products -->
 {% for produkt in all_products %}
-Produkt: {{produkt.name}}<br>
+
+<div class="product-container">
+    <div class="product">
+        <div class="product-category">{{product.category}}</div>
+        <div class="img"><img src="" alt=""></div>
+        <div class="title">{{produkt.name}}</div>
+        <div class="description">{{produkt.description}}</div>
+        <div class="price">{{produkt.price}}</div>
+    </div>
+</div>
+
 {% endfor %}
 
 {% endblock %}
+
+
+    name = models.CharField(max_length=100)
+    description = models.TextField(default="")
+    image_url = models.URLField(default="")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=10, decimal_places=2)

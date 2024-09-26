@@ -8,12 +8,7 @@ from django.http import HttpResponse
 
 from Eshop_app.models import Product
 
-# This function will render base.html page
-def base(request):
-    return render(request, 'base.html')
-
-
-# homepage
+# This function will render homepage.html page
 def home_page(request):
     return render(request, 'homepage.html',
                   context={
