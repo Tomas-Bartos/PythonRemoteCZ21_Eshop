@@ -1,3 +1,11 @@
+ECHO is on.
+/.idea/1_Final_Project.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/vcs.xml
+staticfiles/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

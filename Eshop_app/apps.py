@@ -1,3 +1,4 @@
+# apps.py is basicaly a config
 from django.apps import AppConfig
 
 
