@@ -35,7 +35,8 @@ Final Python projekt - E-shop
 - [ ] Košík
 - [ ] Zpracování objednávek - formulář, fakturace
 - [ ] Počasí
-- [ ] Testing
+- [ ] Testing 
+
 
 <br>
 <hr>
