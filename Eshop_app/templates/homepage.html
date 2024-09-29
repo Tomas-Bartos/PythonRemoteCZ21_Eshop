@@ -9,19 +9,18 @@
 <h3>Všechny produkty</h3>
 
 <!-- For loop to show all products -->
+<div class="product-container grid_auto_fill">
 {% for produkt in all_products %}
 {% load static %}
-<div class="product-container">
     <div class="product">
         <div class="product-category">{{product.category}}</div>
-        <div class="img"><img src="{% static produkt.image_url %}" alt=""></div>
+        <div class="img"><img src="{{ produkt.image }}" alt="{{ produkt.name }}"></div>
         <div class="title">{{produkt.name}}</div>
         <div class="description">{{produkt.description}}</div>
         <div class="price">{{produkt.price}}</div>
     </div>
-</div>
-
 {% endfor %}
+</div>
 
 {% endblock %}
 

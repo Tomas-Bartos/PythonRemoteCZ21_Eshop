@@ -132,3 +132,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Add default path for SASS files
 # SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'static')
+
+# dynamic routs for images
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

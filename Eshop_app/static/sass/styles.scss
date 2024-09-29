@@ -3,9 +3,54 @@
 body {
   padding: 0;
   margin: 0;
+
+  * {
+    box-sizing: border-box;
+  }
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 30px;
   text-align: center;
+}
+
+// ** MARGIN **
+$margin-small: 10px;
+$margin-medium: 20px;
+$margin-big: 40px;
+// ** ↑↑ **
+
+// ** PADDING **
+$padding-small: 10px;
+$padding-medium: 20px;
+$padding-big: 40px;
+// ** ↑↑ **
+
+// ** GRID **
+$gap-small: 5px;
+$gap-medium: 10px;
+$gap-big: 20px;
+
+// Grid autofill container
+.grid_auto_fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+  gap: $gap-big;
+  margin: $margin-big 0;
+  padding: 0 $padding-medium;
+}
+// ** ↑↑ **
+
+// product card
+.product {
+  img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #993300;
+  }
 }
