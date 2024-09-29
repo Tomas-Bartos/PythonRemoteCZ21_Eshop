@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from Eshop_app.models import Product, Category
 
+
 admin.site.register(Product)
 admin.site.register(Category)
 urlpatterns = [
