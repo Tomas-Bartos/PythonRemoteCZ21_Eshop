@@ -38,7 +38,7 @@ def maso(request):
     meat_category = get_object_or_404(Category, name='Maso')
     meat_products = Product.objects.filter(category=meat_category)
 
-    return render(request, 'homepage.html', context={
+    return render(request, 'maso.html', context={
         "maso": meat_products
     })
 
