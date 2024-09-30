@@ -12,6 +12,7 @@ urlpatterns = [
     path('homepage/', views.homepage, name='homepage'),
     path('cart/', views.cart, name='cart'),
     path('login/', views.login, name='login'),
+    path('registrace/', views.register, name='register'),
     path('maso/', views.maso, name='maso'),
     path('ovoce/', views.ovoce, name='ovoce'),
     path('mlecne-a-chlazene/', views.mlecne_a_chlazene, name='mlecne-a-chlazene'),
@@ -20,4 +21,8 @@ urlpatterns = [
     path('categories/new/', views.category_create, name='category_create'),
     path('categories/<int:pk>/edit/', views.category_update, name='category_update'),
     path('categories/<int:pk>/delete/', views.category_delete, name='category_delete'),
+    path('user/', views.user_page, name='user'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
