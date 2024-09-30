@@ -25,4 +25,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # include URLS from Eshop_app urls.py
     path('Eshop_app/', include('Eshop_app.urls')),
+    path('Eshop_app/', include('Authentication_app.urls')),
 ]
