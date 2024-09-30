@@ -1,0 +1,15 @@
+<!-- Add everything from the base.htm to this page -->
+{% extends "base.html" %}
+
+<!-- Add everything inside of block content to the page structure  -->
+{% block content %}
+
+<h1>{% if form.instance.pk %}Upravit kategorii{% else %}Create Category{% endif %}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Uložit</button>
+</form>
+<a href="{% url 'category_list' %}">Zpět na seznam</a>
+
+{% endblock %}
