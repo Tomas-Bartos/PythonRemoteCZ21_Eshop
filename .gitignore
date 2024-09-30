@@ -6,3 +6,5 @@ ECHO is on.
 /.idea/inspectionProfiles/Project_Default.xml
 /.idea/vcs.xml
 staticfiles/
+__pycache__/
+*.py[cod]

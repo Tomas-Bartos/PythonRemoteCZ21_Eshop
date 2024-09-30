@@ -15,10 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from Eshop_app.views import home
 
+from django.contrib import admin
+from Eshop_app.models import Product, Category
+
+admin.site.register(Product)
+admin.site.register(Category)
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth', include('Authentication_app.urls')),
-    path('', home, name='home'),
+    # include URLS from Eshop_app urls.py
+    path('Eshop_app/', include('Eshop_app.urls')),
 ]
