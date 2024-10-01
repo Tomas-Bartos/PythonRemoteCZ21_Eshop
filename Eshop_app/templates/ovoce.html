@@ -6,16 +6,13 @@
 
 <h1 class="main_header">Ovoce</h1>
 
+<!-- Container for products -->
 <div class="product-container grid_auto_fill">
-{% for produkt in ovoce %}
-    <div class="product">
-        <div class="product-category">{{produkt.category}}</div>
-        <div class="img"><img src="{{ produkt.image }}" alt="{{ produkt.name }}"></div>
-        <div class="title">{{produkt.name}}</div>
-        <div class="description">{{produkt.description|linebreaks}}</div>
-        <div class="price">{{produkt.price}}</div>
-    </div>
-{% endfor %}
+    <!-- For loop to show all products -->
+    {% for produkt in ovoce %}
+        <!-- include product component -->
+        {% include 'components/product_with_all_fields.html' with produkt=produkt %}
+    {% endfor %}
 </div>
 
 {% endblock %}

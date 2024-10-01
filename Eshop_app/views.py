@@ -77,7 +77,7 @@ def mrazene(request):
     mrazene_category = get_object_or_404(Category, id=4)
     mrazene_products = Product.objects.filter(category=mrazene_category)
 
-    return render(request, 'ovoce.html', context={
+    return render(request, 'mrazene.html', context={
         "mrazene": mrazene_products
     })
 
