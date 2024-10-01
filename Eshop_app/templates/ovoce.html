@@ -6,4 +6,16 @@
 
 <h1 class="main_header">Ovoce</h1>
 
+<div class="product-container grid_auto_fill">
+{% for produkt in ovoce %}
+    <div class="product">
+        <div class="product-category">{{produkt.category}}</div>
+        <div class="img"><img src="{{ produkt.image }}" alt="{{ produkt.name }}"></div>
+        <div class="title">{{produkt.name}}</div>
+        <div class="description">{{produkt.description|linebreaks}}</div>
+        <div class="price">{{produkt.price}}</div>
+    </div>
+{% endfor %}
+</div>
+
 {% endblock %}

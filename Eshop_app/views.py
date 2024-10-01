@@ -40,28 +40,46 @@ def user_page(request):
 
 # maso
 def maso(request):
-    # Get all products from maso category
-    meat_category = get_object_or_404(Category, name='Maso')
-    meat_products = Product.objects.filter(category=meat_category)
+    # Get all products from category
+    maso_category = get_object_or_404(Category, id=2)
+    maso_products = Product.objects.filter(category=maso_category)
 
     return render(request, 'maso.html', context={
-        "maso": meat_products
+        "maso": maso_products
     })
 
 
 # mlecne a chlazene
 def mlecne_a_chlazene(request):
-    return render(request, 'mlecne_a_chlazene.html')
+    # Get all products from category
+    mlecne_chlazene_category = get_object_or_404(Category, id=3)
+    mlecne_chlazene_products = Product.objects.filter(category=mlecne_chlazene_category)
+
+    return render(request, 'mlecne_a_chlazene.html', context={
+        "mlecne_chlazene": mlecne_chlazene_products
+    })
 
 
 # ovoce
 def ovoce(request):
-    return render(request, 'ovoce.html')
+    # Get all products from category
+    ovoce_category = get_object_or_404(Category, id=1)
+    ovoce_products = Product.objects.filter(category=ovoce_category)
+
+    return render(request, 'ovoce.html', context={
+        "ovoce": ovoce_products
+    })
 
 
 # mrazene
 def mrazene(request):
-    return render(request, 'mrazene.html')
+    # Get all products from category
+    mrazene_category = get_object_or_404(Category, id=4)
+    mrazene_products = Product.objects.filter(category=mrazene_category)
+
+    return render(request, 'ovoce.html', context={
+        "mrazene": mrazene_products
+    })
 
 
 def category_create(request):

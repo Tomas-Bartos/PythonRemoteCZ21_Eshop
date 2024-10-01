@@ -9,7 +9,6 @@
 <!-- For loop to show all products -->
 <div class="product-container grid_auto_fill">
 {% for produkt in maso %}
-{% load static %}
     <div class="product">
         <div class="product-category">{{produkt.category}}</div>
         <div class="img"><img src="{{ produkt.image }}" alt="{{ produkt.name }}"></div>
