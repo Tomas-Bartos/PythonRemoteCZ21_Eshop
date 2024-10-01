@@ -11,7 +11,7 @@ def register(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('home')
+            return redirect('user_page')
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
@@ -22,7 +22,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)  # Přihlásí uživatele
-            return redirect('home')  # Přesměrování na domovskou stránku
+            return redirect('user_page')  # Přesměrování na uzivatelskou stránku
     else:
         form = AuthenticationForm()  # Nový formulář pro GET požadavek
     return render(request, 'login.html', {'form': form})
