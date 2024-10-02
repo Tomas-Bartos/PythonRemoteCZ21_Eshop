@@ -6,4 +6,16 @@
 
 <h1>Vítejte ve svém účtu</h1>
 
+<!-- edit product form -->
+<!-- TODO: make it visible only for user with rights zamestnanec -->
+<!--{% include 'components/edit_product_form.html' with form=form %}-->
+<div class="form_container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>{{ form }}</table>
+        <button type="submit">Uložit změny</button>
+    </form>
+    testlo
+
+</div>
 {% endblock %}

@@ -1,0 +1,9 @@
+<div class="form_container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <pre>{{ form.as_p }}</pre>
+        <button type="submit">Uložit změny</button>
+    </form>
+    test
+
+</div>

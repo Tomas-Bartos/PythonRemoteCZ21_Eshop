@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product, Category
 from django.http import HttpResponse
-from .forms import CategoryForm
+from .forms import CategoryForm, ProductForm
 
 # Create your views here.
 # request -> response
@@ -116,3 +116,20 @@ def category_delete(request, pk):
         category.delete()
         return redirect('category_list')
     return render(request, 'category_confirm_delete.html', {'category': category})
+
+
+# Edit product
+def edit_product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+
+    # if form is POST, is validated and if correct it will be saved
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('product_detail', pk=product.pk)  # Redirect back to product detail
+    else:
+        form = ProductForm()
+        print("Else z edit product")
+
+    return render(request, 'edit_product.html', {'form': form, 'product': product})
