@@ -1,8 +1,6 @@
 # views must be mapped to urls
 from django.urls import path
 from . import views
-from django.conf import settings
-from django.conf.urls.static import static
 from logging import getLogger
 from django.views.generic import ListView, UpdateView
 
@@ -25,4 +23,4 @@ urlpatterns = [
     path('product/<int:pk>/edit/', views.edit_product, name='edit_product'),
     path('product/<int:pk>/', views.product_detail, name='product_detail'),
     path('edit_product', views.edit_product, name='edit_product_page')
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]

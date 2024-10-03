@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
-from django.contrib import admin
 from Eshop_app.models import Product, Category
+from django.conf.urls.static import static
+from django.conf import settings
 
 admin.site.register(Product)
 admin.site.register(Category)
@@ -27,4 +27,4 @@ urlpatterns = [
     path('Eshop_app/', include('Eshop_app.urls')),
     # include URLS from Authentication_app urls.py
     path('Eshop_app/', include('Authentication_app.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
