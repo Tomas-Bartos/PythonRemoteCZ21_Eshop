@@ -1,8 +1,22 @@
 // About SASS https://sass-lang.com/guide/#variables
 
+// Fonts
+$header: 'Noto Serif Oriya', serif;
+$paragraph: 'Quicksand', sans-serif;
+
 body {
   padding: 0;
   margin: 0;
+
+
+  :not(h1, h2, h3, h4, h5, h6, .title) {
+    font-family: $paragraph;
+    font-size: 14px;
+  }
+
+  h1, h2, h3, h4, h5, h6, .title {
+    font-family: $header;
+  }
 
   * {
     box-sizing: border-box;
@@ -48,9 +62,9 @@ $gap-big: 20px;
 // ** ↑↑ **
 
 // ** CONTAINERS **
-  .container_inner {
-    padding: 30px 0;
-  }
+.container_inner {
+  padding: 30px 0;
+}
 
 // ** ↑↑ **
 
@@ -70,7 +84,7 @@ $gap-big: 20px;
   }
 
   .title {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     line-height: 1;
     color: #993300;
