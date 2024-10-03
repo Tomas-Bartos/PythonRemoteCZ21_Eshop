@@ -4,16 +4,19 @@
 <!-- Add everything inside of block content to the page structure  -->
 {% block content %}
 
-<h1 class="main_header">Editace produktů</h1>
-<div class="container mt-4">
-    <h2>Editace produktu: {{ product.name }}</h2>
+
+<div class="product">
+    <h4>Editace produktu: {{ product.name }}</h4>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-warning">Uložit změny</button>
-        <a href="{% url 'product_detail' product.pk %}" class="btn btn-secondary">Zpět</a>
+        <!-- <a href="{% url 'product_detail' product.pk %}" class="btn btn-secondary">Zpět</a>-->
+        <a href="{% url 'user' %}" class="btn btn-secondary">Zpět</a>
     </form>
 </div>
 
 
 {% endblock %}
+
+<!--http://127.0.0.1:8000/Eshop_app/product/1/-->
