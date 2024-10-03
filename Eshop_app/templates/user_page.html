@@ -7,21 +7,20 @@
 <h1 class="main_header">Vítejte ve svém účtu</h1>
 
 <!-- create product -->
-<h3>Vytvořit produkt</h3>
+<h5>Vytvořit produkt</h5>
 {% include 'components/component_create_product.html' %}
 
-
 <!-- edit product -->
-<h3>Editace produktů</h3>
-<!-- For loop to show all products -->
-<div class="product-container grid_auto_fill">
+<h5>Editace produktů</h5>
+<div class="product-container grid_auto_fill mb-4">
+    <!-- For loop to show all products -->
     {% for produkt in products_to_edit %}
     <!-- include product component -->
     {% include 'components/component_edit_product.html' with produkt=produkt %}
     {% endfor %}
 </div>
 
-<h3>Editace kategorií</h3>
+<h5>Editace kategorií</h5>
 
 
 {% endblock %}

@@ -121,6 +121,16 @@ def create_product(request):
 
     return render(request, 'create_product.html', {'form': form})
 
+# delete product
+def delete_product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+
+    if request.method == 'POST':
+        product.delete()
+        return redirect('user')  # redirect after delete
+
+    return render(request, 'delete_product.html', {'product': product})
+
 
 def category_create(request):
     if request.method == 'POST':
