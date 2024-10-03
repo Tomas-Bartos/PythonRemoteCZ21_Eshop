@@ -8,6 +8,8 @@
     <div class="price mt-2">Cena: {{ produkt.price }} Kč</div>
     <!-- edit product -->
     <a href="{% url 'edit_product' produkt.pk %}" class="btn btn-primary mt-3" role="button">Editovat produkt</a>
+    <!-- smazat produkt -->
+    <a href="{% url 'delete_product' produkt.pk %}" class="btn btn-danger mt-3" role="button">Smazat produkt</a>
 </div>
 
 <!-- product detail -->
