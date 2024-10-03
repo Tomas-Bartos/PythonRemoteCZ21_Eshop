@@ -5,13 +5,15 @@
 {% block content %}
 
 <h1 class="main_header">Editace produktů</h1>
-
-<!-- For loop to show all products -->
-<div class="product-container grid_auto_fill">
-{% for produkt in products_to_edit %}
-    <!-- include product component -->
-    {% include 'components/component_edit_product.html' with produkt=produkt %}
-{% endfor %}
+<div class="container mt-4">
+    <h2>Editace produktu: {{ product.name }}</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-warning">Uložit změny</button>
+        <a href="{% url 'product_detail' product.pk %}" class="btn btn-secondary">Zpět</a>
+    </form>
 </div>
+
 
 {% endblock %}

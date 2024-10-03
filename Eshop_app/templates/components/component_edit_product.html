@@ -5,5 +5,7 @@
     </div>
     <div class="title">{{ produkt.name }}</div>
     <!-- edit product -->
-    <a class="btn btn-primary" href="{% url 'edit_product' product.pk %}" role="button">Link</a>
+    <a href="{% url 'edit_product' product.pk %}" class="btn btn-primary" role="button">Editovat produkt</a>
+    <!-- product detail -->
+    <a href="{% url 'product_detail' product.pk %}" class="btn btn-secondary">Zpět</a>
 </div>

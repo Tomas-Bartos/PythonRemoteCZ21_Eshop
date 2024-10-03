@@ -6,6 +6,14 @@
 
 <h1 class="main_header">Vítejte ve svém účtu</h1>
 
-<a class="btn btn-primary" href="{% url 'edit_product_page' %}" role="button">Editace produktů</a>
+<!-- For loop to show all products -->
+<div class="product-container grid_auto_fill">
+{% for produkt in products_to_edit %}
+    <!-- include product component -->
+    {% include 'components/component_edit_product.html' with produkt=produkt %}
+{% endfor %}
+</div>
 
 {% endblock %}
+
+<!--<a class="btn btn-primary" href="{% url 'edit_product_page' %}" role="button">Editace produktů</a>-->

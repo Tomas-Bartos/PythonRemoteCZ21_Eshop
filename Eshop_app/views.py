@@ -2,12 +2,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product, Category
 from django.http import HttpResponse
 from .forms import CategoryForm, ProductForm
+from django.contrib.auth.decorators import login_required, user_passes_test
+
 
 # Create your views here.
 # request -> response
 # views are request handler
-
-from Eshop_app.models import Product
 
 
 # This function will render homepage.html page
@@ -35,7 +35,10 @@ def register(request):
 
 # user page
 def user_page(request):
-    return render(request, 'user_page.html')
+    return render(request, 'user_page.html',
+                  context={
+                      "products_to_edit": Product.objects.all()
+                  })
 
 
 # maso
@@ -82,12 +85,10 @@ def mrazene(request):
     })
 
 
-# Edit product page
-def edit_product_page(request):
-    return render(request, 'edit_product.html',
-                  context={
-                      "products_to_edit": Product.objects.all()
-                  })
+# product detail
+def product_detail(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    return render(request, 'product_detail.html', {'product': product})
 
 
 # Edit product form
@@ -99,12 +100,13 @@ def edit_product(request, pk):
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
-            # return redirect('product_detail', pk=product.pk)  # Redirect back to product detail
-            return redirect('edit_product') # Redirect back to edit_product.html
+            return redirect('product_detail', pk=product.pk)  # Redirect back to product detail
+            # return redirect('edit_product') # Redirect back to edit_product.html
     else:
-        form = ProductForm()
+        # form = ProductForm()
+        form = ProductForm(instance=product)
 
-    return render(request, 'edit_product_form.html', {'form': form, 'product': product})
+    return render(request, 'edit_product.html', {'form': form, 'product': product})
 
 
 def category_create(request):

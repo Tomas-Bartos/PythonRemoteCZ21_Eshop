@@ -1,0 +1,20 @@
+<!-- Add everything from the base.htm to this page -->
+{% extends "base.html" %}
+
+<!-- Add everything inside of block content to the page structure  -->
+{% block content %}
+<h3>Produkt detail</h3>
+  <div class="container mt-4">
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
+    <h4>{{ product.name }}</h4>
+    <p>{{ product.description }}</p>
+    <p>Cena: {{ product.price }} Kč</p>
+    <a href="{% url 'edit_product' product.pk %}" class="btn btn-primary">Upravit produkt</a>
+  </div>
+{% endblock %}
+
+<!--http://127.0.0.1:8000/Eshop_app/product/1/-->
+
+<!--    {% if user.is_authenticated and user.is_superuser %}-->
+<!--      <a href="{% url 'edit_product' product.pk %}" class="btn btn-warning">Editovat produkt</a>-->
+<!--    {% endif %}-->
