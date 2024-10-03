@@ -100,8 +100,8 @@ def edit_product(request, pk):
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
-            return redirect('product_detail', pk=product.pk)  # Redirect back to product detail
-            # return redirect('edit_product') # Redirect back to edit_product.html
+            # return redirect('product_detail', pk=product.pk)  # Redirect back to product detail
+            return redirect('user')  # Redirect back to user_page.html
     else:
         # form = ProductForm()
         form = ProductForm(instance=product)

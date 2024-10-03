@@ -4,17 +4,20 @@
 <!-- Add everything inside of block content to the page structure  -->
 {% block content %}
 <h3>Produkt detail</h3>
-  <div class="container mt-4">
-    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
-    <h4>{{ product.name }}</h4>
-    <p>{{ product.description }}</p>
-    <p>Cena: {{ product.price }} Kč</p>
-    <a href="{% url 'edit_product' product.pk %}" class="btn btn-primary">Upravit produkt</a>
-  </div>
+<div class="product-container grid_auto_fill">
+    <div class="product">
+        <div class="product-category">{{ product.category }}</div>
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
+        <div class="title">{{ product.name }}</div>
+        <div class="description">{{ product.description }}</div>
+        <div class="price mt-3">Cena: {{ product.price }} Kč</div>
+        <a href="{% url 'edit_product' product.pk %}" class="btn btn-primary mt-3">Upravit produkt</a>
+    </div>
+</div>
 {% endblock %}
-
-<!--http://127.0.0.1:8000/Eshop_app/product/1/-->
 
 <!--    {% if user.is_authenticated and user.is_superuser %}-->
 <!--      <a href="{% url 'edit_product' product.pk %}" class="btn btn-warning">Editovat produkt</a>-->
 <!--    {% endif %}-->
+
+<!--http://127.0.0.1:8000/Eshop_app/product/1/-->

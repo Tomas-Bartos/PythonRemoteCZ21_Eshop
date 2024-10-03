@@ -23,7 +23,6 @@ $padding-big: 40px;
 
 // ** FONTS **
 h1 {
-  font-size: 30px;
   text-align: center;
 
   &.main_header {
@@ -31,7 +30,7 @@ h1 {
   }
 }
 
-// ** ↑↑ **
+// ** GRID **
 
 // ** GRID **
 $gap-small: 5px;
@@ -41,10 +40,22 @@ $gap-big: 20px;
 // Grid autofill container
 .grid_auto_fill {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: $gap-big;
   margin: $margin-big 0;
   padding: 0 $padding-medium;
+}
+
+// ** ↑↑ **
+
+// ** CONTAINERS **
+.content_container {
+  width: 100%;
+  max-width: 950px;
+
+  .container_inner {
+    padding: 30px;
+  }
 }
 
 // ** ↑↑ **
@@ -54,11 +65,14 @@ $gap-big: 20px;
   padding: $padding-medium;
   border: 1px solid #e7e7e7;
   border-radius: 10px;
+  @media screen  {
+    
+  }
 
   img {
     width: 100%;
     height: 200px;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .title {
@@ -67,6 +81,10 @@ $gap-big: 20px;
     line-height: 1;
     color: #993300;
     margin: $margin-small 0;
-
+  }
+  .description {
+    p {
+      margin: 0 0 5px 0;
+    }
   }
 }
