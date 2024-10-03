@@ -99,10 +99,10 @@ def edit_product(request, pk):
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
-            return redirect('product_detail', pk=product.pk)  # Redirect back to product detail
+            # return redirect('product_detail', pk=product.pk)  # Redirect back to product detail
+            return redirect('edit_product') # Redirect back to edit_product.html
     else:
         form = ProductForm()
-        print("Else z edit product")
 
     return render(request, 'edit_product_form.html', {'form': form, 'product': product})
 
