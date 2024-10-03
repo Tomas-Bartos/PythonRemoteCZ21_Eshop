@@ -6,13 +6,23 @@
 
 <h1 class="main_header">Vítejte ve svém účtu</h1>
 
+<!-- create product -->
+<h3>Vytvořit produkt</h3>
+{% include 'components/component_create_product.html' %}
+
+
+<!-- edit product -->
+<h3>Editace produktů</h3>
 <!-- For loop to show all products -->
 <div class="product-container grid_auto_fill">
-{% for produkt in products_to_edit %}
+    {% for produkt in products_to_edit %}
     <!-- include product component -->
     {% include 'components/component_edit_product.html' with produkt=produkt %}
-{% endfor %}
+    {% endfor %}
 </div>
+
+<h3>Editace kategorií</h3>
+
 
 {% endblock %}
 
