@@ -1,6 +1,6 @@
 // About SASS https://sass-lang.com/guide/#variables
 
-// Fonts
+// ** Fonts **
 $header: 'Noto Serif Oriya', serif;
 $paragraph: 'Quicksand', sans-serif;
 
@@ -22,6 +22,8 @@ body {
     box-sizing: border-box;
   }
 }
+
+// ** ↑↑ **
 
 // ** MARGIN **
 $margin-small: 10px;
