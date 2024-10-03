@@ -1,0 +1,20 @@
+<!-- Add everything from the base.htm to this page -->
+{% extends "base.html" %}
+
+<!-- Add everything inside of block content to the page structure  -->
+{% block content %}
+<h3>Upravit produkt: {{ product.name }}</h3>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-outline-warning" type="submit">Uložit změny</button>
+
+</form>
+
+
+{% endblock %}
+
+<!--http://127.0.0.1:8000/Eshop_app/product/1/edit/-->
+
+<!--<a href="{% url 'product_detail' product.pk %}">Zpět na produkt</a>-->

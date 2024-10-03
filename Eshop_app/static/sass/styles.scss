@@ -31,7 +31,7 @@ h1 {
   }
 }
 
-// ** ↑↑ **
+// ** GRID **
 
 // ** GRID **
 $gap-small: 5px;
@@ -45,6 +45,19 @@ $gap-big: 20px;
   gap: $gap-big;
   margin: $margin-big 0;
   padding: 0 $padding-medium;
+}
+
+// ** ↑↑ **
+
+// ** CONTAINERS **
+.content_container {
+  width: 100%;
+  max-width: 950px;
+
+  .container_inner {
+    display: flex;
+    padding: 30px;
+  }
 }
 
 // ** ↑↑ **

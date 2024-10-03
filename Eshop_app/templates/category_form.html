@@ -4,7 +4,7 @@
 <!-- Add everything inside of block content to the page structure  -->
 {% block content %}
 
-<h1>{% if form.instance.pk %}Upravit kategorii{% else %}Create Category{% endif %}</h1>
+<h1 class="main_header">{% if form.instance.pk %}Upravit kategorii{% else %}Create Category{% endif %}</h1>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}

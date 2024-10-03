@@ -4,15 +4,13 @@
 <!-- Add everything inside of block content to the page structure  -->
 {% block content %}
 
-<h1 class="main_header">Vítejte na stránkách eshopu Ba-Br toto je naše domovská stránka</h1>
-
-<h3>Všechny produkty</h3>
+<h1 class="main_header">Editace produktů</h1>
 
 <!-- For loop to show all products -->
 <div class="product-container grid_auto_fill">
-{% for produkt in all_products %}
+{% for produkt in products_to_edit %}
     <!-- include product component -->
-    {% include 'components/component_product_no_description.html' with produkt=produkt %}
+    {% include 'components/component_edit_product.html' with produkt=produkt %}
 {% endfor %}
 </div>
 

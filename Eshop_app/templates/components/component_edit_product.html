@@ -1,0 +1,9 @@
+<div class="product">
+    <div class="product-category">{{ produkt.category }}</div>
+    <div class="img">
+        <img src="{{ produkt.image.url }}" alt="{{ produkt.name }}">
+    </div>
+    <div class="title">{{ produkt.name }}</div>
+    <!-- edit product -->
+    <a class="btn btn-primary" href="{% url 'edit_product' product.pk %}" role="button">Link</a>
+</div>

@@ -4,18 +4,8 @@
 <!-- Add everything inside of block content to the page structure  -->
 {% block content %}
 
-<h1>Vítejte ve svém účtu</h1>
+<h1 class="main_header">Vítejte ve svém účtu</h1>
 
-<!-- edit product form -->
-<!-- TODO: make it visible only for user with rights zamestnanec -->
-<!--{% include 'components/edit_product_form.html' with form=form %}-->
-<div class="form_container">
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <table>{{ form }}</table>
-        <button type="submit">Uložit změny</button>
-    </form>
-    testlo
+<a class="btn btn-primary" href="{% url 'edit_product_page' %}" role="button">Editace produktů</a>
 
-</div>
 {% endblock %}

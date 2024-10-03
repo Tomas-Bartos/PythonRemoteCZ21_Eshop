@@ -22,6 +22,15 @@ h1.main_header {
   padding: 0 20px;
 }
 
+.content_container {
+  width: 100%;
+  max-width: 950px;
+}
+.content_container .container_inner {
+  display: flex;
+  padding: 30px;
+}
+
 .product {
   padding: 20px;
   border: 1px solid #e7e7e7;
