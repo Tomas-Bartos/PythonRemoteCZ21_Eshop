@@ -109,6 +109,19 @@ def edit_product(request, pk):
     return render(request, 'edit_product.html', {'form': form, 'product': product})
 
 
+# create product
+def create_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('user')  # Redirect back to user_page.html
+    else:
+        form = ProductForm()
+
+    return render(request, 'create_product.html', {'form': form})
+
+
 def category_create(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)

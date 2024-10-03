@@ -1,0 +1,17 @@
+<!-- Add everything from the base.htm to this page -->
+{% extends "base.html" %}
+
+<!-- Add everything inside of block content to the page structure  -->
+{% block content %}
+<div class="product">
+    <h1 class="main_header">Přidat nový produkt</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Vytvořit produkt</button>
+    </form>
+    <a href="{% url 'user' %}" class="btn btn-secondary">Zpět</a>
+
+</div>
+{% endblock %}
