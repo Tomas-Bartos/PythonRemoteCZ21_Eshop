@@ -166,10 +166,10 @@ def category_update(request, pk):
         form = CategoryForm(instance=category)
     return render(request, 'category_form.html', {'form': form})
 
-
+# Category delete
 def category_delete(request, pk):
     category = get_object_or_404(Category, pk=pk)
     if request.method == 'POST':
         category.delete()
-        return redirect('category_list')
+        return redirect('user')
     return render(request, 'category_confirm_delete.html', {'category': category})
