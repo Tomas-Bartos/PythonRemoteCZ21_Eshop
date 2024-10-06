@@ -37,7 +37,8 @@ def register(request):
 def user_page(request):
     return render(request, 'user_page.html',
                   context={
-                      "products_to_edit": Product.objects.all()
+                      "products_to_edit": Product.objects.all(),
+                      "categories": Category.objects.all(),
                   })
 
 
