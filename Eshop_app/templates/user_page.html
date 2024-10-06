@@ -12,16 +12,11 @@
 
 <!-- edit product -->
 <h5>Editace produktů</h5>
-<div class="product-container grid_auto_fill mb-4">
-    <!-- For loop to show all products -->
-    {% for produkt in products_to_edit %}
-    <!-- include product component -->
-    {% include 'components/component_edit_product.html' with produkt=produkt %}
-    {% endfor %}
-</div>
+{% include 'components/component_edit_product.html' with product=product %}
 
+<!-- edit category -->
 <h5>Editace kategorií</h5>
-
+{% include 'components/component_category_list.html' with categories=categories %}
 
 {% endblock %}
 

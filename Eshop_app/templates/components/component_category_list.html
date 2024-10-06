@@ -1,13 +1,7 @@
-<!-- Add everything from the base.htm to this page -->
-{% extends "base.html" %}
-
-<!-- Add everything inside of block content to the page structure  -->
-{% block content %}
-
-<h1 class="main_header">Seznam kategorií</h1>
 <div class="product mb-4">
-    <a class="btn btn-success mb-5" href="{% url 'category_create' %}">Vytvořte novou kategorii</a>
+    <a id="new_category" class="btn btn-success mb-5" href="{% url 'category_create' %}">Vytvořte novou kategorii</a>
     <ul class="category_list">
+        <pre>{{ categories }}</pre>
         {% for category in categories %}
         <li>
             <div>{{ category.name }}</div>
@@ -17,5 +11,3 @@
         {% endfor %}
     </ul>
 </div>
-
-{% endblock %}

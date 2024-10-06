@@ -3,13 +3,13 @@
 
 <!-- Add everything inside of block content to the page structure  -->
 {% block content %}
-
-<h1 class="main_header">Smazat kategorii</h1>
-<p>Jste si jisti že chcete kategorii odstranit? "{{ category.name }}"?</p>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Ano, odstranit</button>
-</form>
-<a href="{% url 'category_list' %}">Ukončit</a>
-
+<div class="product">
+    <h5>Bude smazána kategorie: {{ category.name }}</h5>
+    <p class="sda_warning">Opravdu chcete smazat tuto kategorii? <b>Tuto operaci nelze vrátit!</b></p>
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit">Ano, smazat</button>
+        <a class="btn btn-secondary" href="{% url 'user' %}#new_category">Ne, jít zpět</a>
+    </form>
+</div>
 {% endblock %}

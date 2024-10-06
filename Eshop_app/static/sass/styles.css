@@ -63,5 +63,27 @@ body .product input[type=text], body .product textarea {
   max-width: 500px;
   max-height: 150px;
 }
+body .category_list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+body .category_list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+  padding: 10px;
+}
+body .category_list li:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+body .category_list li div:first-child {
+  font-size: 18px;
+  font-weight: 500;
+}
+body .category_list li div:nth-child(2) {
+  margin-left: auto;
+}
 
 /*# sourceMappingURL=styles.css.map */

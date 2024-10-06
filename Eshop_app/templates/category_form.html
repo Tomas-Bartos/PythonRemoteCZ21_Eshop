@@ -3,13 +3,13 @@
 
 <!-- Add everything inside of block content to the page structure  -->
 {% block content %}
-
-<h1 class="main_header">{% if form.instance.pk %}Upravit kategorii{% else %}Create Category{% endif %}</h1>
+<div class="product">
+<h5 >{% if form.instance.pk %}Upravit kategorii{% else %}Vytvořit novou kategorii{% endif %}</h5>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Uložit</button>
+    <button class="btn btn-primary" type="submit">Vytvořit kategorii</button>
+    <a class="btn btn-secondary"  href="{% url 'user' %}#new_category">Zpět</a>
 </form>
-<a href="{% url 'category_list' %}">Zpět na seznam</a>
-
+</div>
 {% endblock %}

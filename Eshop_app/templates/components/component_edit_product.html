@@ -1,16 +1,18 @@
-<div class="product">
-    <div class="product-category mb-2">{{ produkt.category }}</div>
-    <div class="img">
-        <img src="{{ produkt.image.url }}" alt="{{ produkt.name }}">
+<div class="product-container grid_auto_fill mb-4">
+    <!-- For loop to show all products -->
+    {% for produkt in products_to_edit %}
+    <div class="product">
+        <div class="product-category mb-2">{{ produkt.category }}</div>
+        <div class="img">
+            <img src="{{ produkt.image.url }}" alt="{{ produkt.name }}">
+        </div>
+        <div class="title">{{ produkt.name }}</div>
+        <div class="description">{{ produkt.description|linebreaks }}</div>
+        <div class="price mt-2">Cena: {{ produkt.price }} Kč</div>
+        <!-- edit product -->
+        <a href="{% url 'edit_product' produkt.pk %}" class="btn btn-primary mt-3" role="button">Editovat produkt</a>
+        <!-- smazat produkt -->
+        <a href="{% url 'delete_product' produkt.pk %}" class="btn btn-danger mt-3" role="button">Smazat produkt</a>
     </div>
-    <div class="title">{{ produkt.name }}</div>
-    <div class="description">{{ produkt.description|linebreaks }}</div>
-    <div class="price mt-2">Cena: {{ produkt.price }} Kč</div>
-    <!-- edit product -->
-    <a href="{% url 'edit_product' produkt.pk %}" class="btn btn-primary mt-3" role="button">Editovat produkt</a>
-    <!-- smazat produkt -->
-    <a href="{% url 'delete_product' produkt.pk %}" class="btn btn-danger mt-3" role="button">Smazat produkt</a>
+    {% endfor %}
 </div>
-
-<!-- product detail -->
-<!--<a href="{% url 'product_detail' produkt.pk %}" class="btn btn-secondary">Náhled produktu</a>-->
