@@ -11,15 +11,18 @@ urlpatterns = [
     path('cart/', views.cart, name='cart'),
     path('login/', views.login, name='login'),
     path('registrace/', views.register, name='register'),
+    path('user/', views.user_page, name='user'),
+    # category pages
     path('maso/', views.maso, name='maso'),
     path('ovoce/', views.ovoce, name='ovoce'),
     path('mlecne-a-chlazene/', views.mlecne_a_chlazene, name='mlecne-a-chlazene'),
     path('mrazene/', views.mrazene, name='mrazene'),
+    # category manipulation
     path('categories/', views.category_list, name='category_list'),
-    path('categories/new/', views.category_create, name='category_create'),
+    path('categories/create/', views.category_create, name='category_create'),
     path('categories/<int:pk>/edit/', views.category_update, name='category_update'),
     path('categories/<int:pk>/delete/', views.category_delete, name='category_delete'),
-    path('user/', views.user_page, name='user'),
+    # product manipulation
     path('product/<int:pk>/edit/', views.edit_product, name='edit_product'),
     path('product/<int:pk>/', views.product_detail, name='product_detail'),
     path('edit_product', views.edit_product, name='edit_product_page'),

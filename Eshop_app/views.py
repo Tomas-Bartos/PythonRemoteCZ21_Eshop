@@ -37,7 +37,8 @@ def register(request):
 def user_page(request):
     return render(request, 'user_page.html',
                   context={
-                      "products_to_edit": Product.objects.all()
+                      "products_to_edit": Product.objects.all(),
+                      "categories": Category.objects.all(),
                   })
 
 
@@ -121,6 +122,7 @@ def create_product(request):
 
     return render(request, 'create_product.html', {'form': form})
 
+
 # delete product
 def delete_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
@@ -131,30 +133,35 @@ def delete_product(request, pk):
 
     return render(request, 'delete_product.html', {'product': product})
 
-
+# Category create
 def category_create(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('category_list')
+            # return redirect('category_list')
+            return redirect('user')
+
     else:
         form = CategoryForm()
     return render(request, 'category_form.html', {'form': form})
 
 
+# Category list
 def category_list(request):
     categories = Category.objects.all()
-    return render(request, 'catgory_list.html', {'categories': categories})
+    print(f'Categories: {categories}')
+    return render(request, 'category_list.html', {'categories': categories})
 
 
+# Category update
 def category_update(request, pk):
     category = get_object_or_404(Category, pk=pk)
     if request.method == 'POST':
         form = CategoryForm(request.POST, instance=category)
         if form.is_valid():
             form.save()
-            return redirect('category_list')
+            return redirect('user')
     else:
         form = CategoryForm(instance=category)
     return render(request, 'category_form.html', {'form': form})

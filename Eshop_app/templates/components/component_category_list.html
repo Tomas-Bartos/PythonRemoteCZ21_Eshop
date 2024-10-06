@@ -1,0 +1,12 @@
+<div class="product mb-4">
+    <a id="new_category" class="btn btn-success mb-4" href="{% url 'category_create' %}">Vytvořte novou kategorii</a>
+    <ul class="category_list">
+        {% for category in categories %}
+        <li>
+            <div>{{ category.name }}</div>
+            <div><a class="btn btn-primary btn-sm" href="{% url 'category_update' category.pk %}">Edit</a></div>
+            <div><a class="btn btn-danger btn-sm" href="{% url 'category_delete' category.pk %}">Delete</a></div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

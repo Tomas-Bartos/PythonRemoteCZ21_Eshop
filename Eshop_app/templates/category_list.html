@@ -3,17 +3,8 @@
 
 <!-- Add everything inside of block content to the page structure  -->
 {% block content %}
-
 <h1 class="main_header">Seznam kategorií</h1>
-<a href="{% url 'category_create' %}">Vytvořte novou kategorii</a>
-<ul>
-    {% for category in categories %}
-        <li>
-            {{ category.name }}
-            <a href="{% url 'category_update' category.pk %}">Edit</a>
-            <a href="{% url 'category_delete' category.pk %}">Delete</a>
-        </li>
-    {% endfor %}
-</ul>
+
+{% include 'components/component_category_list.html' with categories=categories %}
 
 {% endblock %}
