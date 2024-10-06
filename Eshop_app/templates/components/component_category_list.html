@@ -1,7 +1,11 @@
 <div class="product mb-4">
-    <a id="new_category" class="btn btn-success mb-5" href="{% url 'category_create' %}">Vytvořte novou kategorii</a>
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <a class="btn btn-secondary" href="{% url 'category_list' %}">seznam kategorií</a>
+        <a id="new_category" class="btn btn-success /*mb-5*/" href="{% url 'category_create' %}">Vytvořte novou
+            kategorii</a>
+    </div>
+
     <ul class="category_list">
-        <pre>{{ categories }}</pre>
         {% for category in categories %}
         <li>
             <div>{{ category.name }}</div>

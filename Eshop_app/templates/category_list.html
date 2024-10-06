@@ -3,19 +3,8 @@
 
 <!-- Add everything inside of block content to the page structure  -->
 {% block content %}
-
 <h1 class="main_header">Seznam kategorií</h1>
-<div class="product mb-4">
-    <a class="btn btn-success mb-5" href="{% url 'category_create' %}">Vytvořte novou kategorii</a>
-    <ul class="category_list">
-        {% for category in categories %}
-        <li>
-            <div>{{ category.name }}</div>
-            <div><a class="btn btn-primary btn-sm" href="{% url 'category_update' category.pk %}">Edit</a></div>
-            <div><a class="btn btn-danger btn-sm" href="{% url 'category_delete' category.pk %}">Delete</a></div>
-        </li>
-        {% endfor %}
-    </ul>
-</div>
+
+{% include 'components/component_category_list.html' with categories=categories %}
 
 {% endblock %}

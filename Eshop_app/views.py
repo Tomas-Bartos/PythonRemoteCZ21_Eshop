@@ -149,6 +149,7 @@ def category_create(request):
 # Category list
 def category_list(request):
     categories = Category.objects.all()
+    print(f'Categories: {categories}')
     return render(request, 'category_list.html', {'categories': categories})
 
 
