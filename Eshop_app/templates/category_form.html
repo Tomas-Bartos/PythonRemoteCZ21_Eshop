@@ -8,7 +8,7 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button class="btn btn-primary" type="submit">Vytvořit kategorii</button>
+    <button class="btn btn-primary" type="submit">{% if form.instance.pk %}Upravit kategorii{% else %}Vytvořit kategorii{% endif %}</button>
     <a class="btn btn-secondary"  href="{% url 'user' %}#new_category">Zpět</a>
 </form>
 </div>
