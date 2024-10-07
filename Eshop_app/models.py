@@ -16,7 +16,20 @@ class Category(models.Model):
 class User(models.Model):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
+    address_country = models.CharField(max_length=100)
+    address_city = models.CharField(max_length=100)
+    address_street = models.CharField(max_length=100)
+    address_zip = models.CharField(max_length=20)
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
 
+class Customer(User):
+    pass
+
+class Employee(User):
+    pass
+
+class Admin(User):
+    is_admin = models.BooleanField(default=True)
 
 class Product(models.Model):
     name = models.CharField(max_length=100)

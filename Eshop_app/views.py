@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Product, Category
+from .models import Product, Category, User, Customer, Admin, Employee
 from django.http import HttpResponse
 from .forms import CategoryForm, ProductForm
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -87,25 +87,36 @@ def mrazene(request):
 
 
 # product detail
-def product_detail(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    return render(request, 'product_detail.html', {'product': product})
+def product_detail(request):
+    products = Product.objects.all()
+
+    if isinstance(request.user, Customer):
+        return render(request, 'customer/products.html', {'products': products})
+
+    elif isinstance(request.user, Employee):
+        return render(request, 'employee/products.html', {'products': products})
+
+    elif isinstance(request.user, Admin):
+        return render(request, 'admin/products.html', {'products': products})
+
+    return render(request, 'public/products.html', {'products': products})
 
 
 # Edit product form
 def edit_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
 
-    # if form is POST, is validated and if correct it will be saved
-    if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES, instance=product)
-        if form.is_valid():
-            form.save()
-            # return redirect('product_detail', pk=product.pk)  # Redirect back to product detail
-            return redirect('user')  # Redirect back to user_page.html
-    else:
-        # form = ProductForm()
-        form = ProductForm(instance=product)
+    if isinstance(request.user, Employee) or isinstance(request.user, Admin):
+        # if form is POST, is validated and if correct it will be saved
+        if request.method == 'POST':
+            form = ProductForm(request.POST, request.FILES, instance=product)
+            if form.is_valid():
+                form.save()
+                # return redirect('product_detail', pk=product.pk)  # Redirect back to product detail
+                return redirect('user')  # Redirect back to user_page.html
+        else:
+            # form = ProductForm()
+            form = ProductForm(instance=product)
 
     return render(request, 'edit_product.html', {'form': form, 'product': product})
 
