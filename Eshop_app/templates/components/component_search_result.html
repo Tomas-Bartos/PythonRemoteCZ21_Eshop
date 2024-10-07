@@ -1,0 +1,23 @@
+<h5>Výsledky hledání.</h5>
+{% if query %}
+<p>Hledaný výraz: <strong>{{ query }}</strong></p>
+{% endif %}
+
+<div class="product-container grid_auto_fill">
+    {% if products %}
+    {% for product in products %}
+    <div class="product">
+        <div class="product-category mb-2">{{ product.category }}</div>
+        <div class="img">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        </div>
+        <div class="title">{{ product.name }}</div>
+        <div class="description">{{ product.description|linebreaks }}</div>
+        <div class="price mt-2">Cena: {{ product.price }} Kč</div>
+        <a class="btn btn-outline-secondary mt-3" href="#" role="button">Do košíku</a>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>Žádné produkty nebyly nalezeny.</p>
+    {% endif %}
+</div>

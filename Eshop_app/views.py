@@ -3,6 +3,7 @@ from .models import Product, Category
 from django.http import HttpResponse
 from .forms import CategoryForm, ProductForm
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.db.models import Q
 
 
 # Create your views here.
@@ -133,6 +134,7 @@ def delete_product(request, pk):
 
     return render(request, 'delete_product.html', {'product': product})
 
+
 # Category create
 def category_create(request):
     if request.method == 'POST':
@@ -166,6 +168,7 @@ def category_update(request, pk):
         form = CategoryForm(instance=category)
     return render(request, 'category_form.html', {'form': form})
 
+
 # Category delete
 def category_delete(request, pk):
     category = get_object_or_404(Category, pk=pk)
@@ -173,3 +176,18 @@ def category_delete(request, pk):
         category.delete()
         return redirect('user')
     return render(request, 'category_confirm_delete.html', {'category': category})
+
+
+# search
+def search_products(request):
+    query = request.GET.get('q')  # get search request from the get parameters
+    if query:
+        products = Product.objects.filter(
+            Q(name__icontains=query) |  # search by name
+            Q(description__icontains=query) |  # search by description
+            Q(category__name__icontains=query)  # search by category
+        )
+    else:
+        products = Product.objects.all()  # if not request get all products
+
+    return render(request, 'search_results.html', {'products': products, 'query': query})

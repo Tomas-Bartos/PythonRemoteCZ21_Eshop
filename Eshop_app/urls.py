@@ -28,4 +28,6 @@ urlpatterns = [
     path('edit_product', views.edit_product, name='edit_product_page'),
     path('product/create/', views.create_product, name='create_product'),
     path('product/<int:pk>/delete/', views.delete_product, name='delete_product'),
+    # search
+    path('search/', views.search_products, name='search_products'),
 ]
