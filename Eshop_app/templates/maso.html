@@ -9,7 +9,7 @@
 <!-- container for products -->
 <div class="product-container grid_auto_fill">
     <!-- For loop to show all products -->
-    {% for produkt in maso %}
+    {% for product in maso %}
         <!-- include product component -->
         {% include 'components/component_product_with_all_fields.html' with product=product %}
     {% endfor %}
