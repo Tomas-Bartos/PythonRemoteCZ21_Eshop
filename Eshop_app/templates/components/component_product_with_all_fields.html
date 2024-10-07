@@ -1,10 +1,10 @@
 <div class="product">
-    <div class="product-category mb-2">{{ produkt.category }}</div>
+    <div class="product-category mb-2">{{ product.category }}</div>
     <div class="img">
-        <img src="{{ produkt.image.url }}" alt="{{ produkt.name }}">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
     </div>
-    <div class="title">{{ produkt.name }}</div>
-    <div class="description">{{ produkt.description|linebreaks }}</div>
-    <div class="price mt-2">Cena: {{ produkt.price }} Kč</div>
+    <div class="title">{{ product.name }}</div>
+    <div class="description">{{ product.description|linebreaks }}</div>
+    <div class="price mt-2">Cena: {{ product.price }} Kč</div>
     <a class="btn btn-outline-secondary mt-3" href="#" role="button">Do košíku</a>
 </div>
