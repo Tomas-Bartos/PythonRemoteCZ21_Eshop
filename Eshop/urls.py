@@ -19,12 +19,10 @@ from Eshop_app.models import Product, Category
 from django.conf.urls.static import static
 from django.conf import settings
 
-admin.site.register(Product)
-admin.site.register(Category)
 urlpatterns = [
     path('admin/', admin.site.urls),
     # include URLS from Eshop_app urls.py
     path('Eshop_app/', include('Eshop_app.urls')),
     # include URLS from Authentication_app urls.py
-    path('Eshop_app/', include('Authentication_app.urls')),
+    path('auth/', include('Authentication_app.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

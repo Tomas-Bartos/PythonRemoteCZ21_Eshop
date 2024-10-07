@@ -26,10 +26,10 @@ class Customer(User):
     pass
 
 class Employee(User):
-    pass
+    is_admin = models.BooleanField(default=True)
 
 class Admin(User):
-    is_admin = models.BooleanField(default=True)
+    is_superadmin = models.BooleanField(default=True)
 
 class Product(models.Model):
     name = models.CharField(max_length=100)

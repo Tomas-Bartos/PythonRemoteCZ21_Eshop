@@ -3,6 +3,7 @@ from .models import Product, Category, User, Customer, Admin, Employee
 from django.http import HttpResponse
 from .forms import CategoryForm, ProductForm
 from django.contrib.auth.decorators import login_required, user_passes_test
+from Authentication_app. views import login, register
 from django.db.models import Q
 
 
@@ -22,16 +23,6 @@ def homepage(request):
 # cart
 def cart(request):
     return render(request, 'cart.html')
-
-
-# login
-def login(request):
-    return render(request, 'login.html')
-
-
-# registration
-def register(request):
-    return render(request, 'register.html')
 
 
 # user page
