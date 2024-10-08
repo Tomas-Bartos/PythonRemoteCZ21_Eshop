@@ -14,6 +14,7 @@ class Category(models.Model):
 
 
 class User(models.Model):
+    username = models.CharField(max_length=100, unique=True)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
     address_country = models.CharField(max_length=100)
@@ -21,6 +22,15 @@ class User(models.Model):
     address_street = models.CharField(max_length=100)
     address_zip = models.CharField(max_length=20)
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+
+    def get_role(self):
+        if hasattr(self, 'customer'):
+            return 'Zákazník'
+        elif hasattr(self, 'employee'):
+            return 'Zaměstnanec'
+        elif hasattr(self, 'admin'):
+            return 'Admin'
+        return 'Neznámá role'
 
 class Customer(User):
     pass

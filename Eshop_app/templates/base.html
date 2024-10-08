@@ -65,12 +65,21 @@
                         <li><a class="dropdown-item" href="{% url 'register' %}">Registrovat</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{% url 'user' %}">Účet</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">Odhlásit se</a></li>
                     </ul>
                 </li>
                 <!-- <li class="nav-item"> -->
                 <!-- <a class="nav-link disabled" aria-disabled="true">Disabled</a>-->
                 <!-- </li>-->
             </ul>
+            <div>
+                {% if user.is_authenticated %}
+                    <p>Přihlášen jako: {{ user.username }} ({{ user.get_role }})</p>
+                {% else %}
+                    <p>Nepřihlášený uživatel</p>
+                {% endif %}
+            </div>
             <form class="d-flex" role="search" method="get" action="{% url 'search_products' %}">
                 <input class="form-control me-2" type="search" name="q" placeholder="Hledat produkty" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Vyhledat</button>
