@@ -9,7 +9,7 @@ body {
   margin: 0;
 
 
-  :not(h1, h2, h3, h4, h5, h6, .title) {
+  :not(h1, h2, h3, h4, h5, h6, .title, .fa) {
     font-family: $paragraph;
     font-size: 14px;
   }
@@ -58,8 +58,6 @@ body {
   }
 
   // ** GRID **
-
-  // ** GRID **
   $gap-small: 5px;
   $gap-medium: 10px;
   $gap-big: 20px;
@@ -80,6 +78,14 @@ body {
   }
 
   // ** ↑↑ **
+
+  // ** MENU **
+  .navbar-collapse {
+    justify-content: space-between;
+  }
+
+  // ** ↑↑ **
+
 
   // product card
   .product {
