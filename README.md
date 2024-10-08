@@ -40,6 +40,16 @@ Final Python projekt - E-shop
 <br>
 <hr>
 
+## User accouts to test eshop functionality with
+<ul>
+<li>employee - 123</li>
+<li>admin - 123</li>
+
+</ul>
+ 
+<br>
+<hr>
+
 ## Konvence commit zpráv:
 Feat: Když přidáš novou funkci nebo část kódu.
 - Příklad: `Feat: added user authentication`
