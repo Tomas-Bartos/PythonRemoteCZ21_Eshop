@@ -11,6 +11,17 @@ from django.db.models import Q
 # request -> response
 # views are request handler
 
+# checks if user is employee or admin @user_passes_test(is_employee_or_admin, login_url='/Eshop_app/user/')
+def is_employee_or_admin(user):
+    is_employee = user.groups.filter(name='Employee').exists()
+    is_admin = user.groups.filter(name='Admin').exists()
+    return is_employee or is_admin
+
+
+# checks if user is admin @user_passes_test(is_admin, login_url='/Eshop_app/user/')
+def is_admin(user):
+    return user.groups.filter(name='Admin').exists()
+
 
 # This function will render homepage.html page
 def homepage(request):
@@ -79,41 +90,38 @@ def mrazene(request):
 
 
 # product detail
-def product_detail(request):
-    products = Product.objects.all()
-
-    if isinstance(request.user, Customer):
-        return render(request, 'customer/products.html', {'products': products})
-
-    elif isinstance(request.user, Employee):
-        return render(request, 'employee/products.html', {'products': products})
-
-    elif isinstance(request.user, Admin):
-        return render(request, 'admin/products.html', {'products': products})
-
-    return render(request, 'public/products.html', {'products': products})
+def product_detail(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    return render(request, 'product_detail.html', {'product': product})
 
 
 # Edit product form
+def is_employee(user):
+    return user.groups.filter(name='Employee').exists()  # add condition for user
+
+
+@login_required
+@user_passes_test(is_employee_or_admin, login_url='/Eshop_app/user/')
 def edit_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
 
-    if isinstance(request.user, Employee) or isinstance(request.user, Admin):
-        # if form is POST, is validated and if correct it will be saved
-        if request.method == 'POST':
-            form = ProductForm(request.POST, request.FILES, instance=product)
-            if form.is_valid():
-                form.save()
-                # return redirect('product_detail', pk=product.pk)  # Redirect back to product detail
-                return redirect('user')  # Redirect back to user_page.html
-        else:
-            # form = ProductForm()
-            form = ProductForm(instance=product)
+    # if form is POST, is validated and if correct it will be saved
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            # return redirect('product_detail', pk=product.pk)  # Redirect back to product detail
+            return redirect('user')  # Redirect back to user_page.html
+    else:
+        # form = ProductForm()
+        form = ProductForm(instance=product)
 
     return render(request, 'edit_product.html', {'form': form, 'product': product})
 
 
 # create product
+@login_required
+@user_passes_test(is_employee_or_admin, login_url='/Eshop_app/user/')
 def create_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
@@ -127,6 +135,8 @@ def create_product(request):
 
 
 # delete product
+@login_required
+@user_passes_test(is_employee_or_admin, login_url='/Eshop_app/user/')
 def delete_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
 
@@ -138,6 +148,7 @@ def delete_product(request, pk):
 
 
 # Category create
+@user_passes_test(is_admin, login_url='/Eshop_app/user/')
 def category_create(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
@@ -159,6 +170,7 @@ def category_list(request):
 
 
 # Category update
+@user_passes_test(is_admin, login_url='/Eshop_app/user/')
 def category_update(request, pk):
     category = get_object_or_404(Category, pk=pk)
     if request.method == 'POST':
@@ -172,6 +184,7 @@ def category_update(request, pk):
 
 
 # Category delete
+@user_passes_test(is_admin, login_url='/Eshop_app/user/')
 def category_delete(request, pk):
     category = get_object_or_404(Category, pk=pk)
     if request.method == 'POST':
