@@ -14,7 +14,7 @@ class Category(models.Model):
 
 
 class User(models.Model):
-    username = models.CharField(max_length=100, unique=True)
+    username = models.CharField(max_length=100, unique=True, default="")
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
     address_country = models.CharField(max_length=100)
@@ -50,7 +50,7 @@ class Admin(User):
 class Product(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(default="")
-    image = models.ImageField(upload_to='products/', blank=True, null=True)
+    image = models.ImageField(upload_to='products/', blank=True, null=True, default='')
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
 

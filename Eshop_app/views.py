@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product, Category, User, Customer, Admin, Employee
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotAllowed
 from .forms import CategoryForm, ProductForm
 from django.contrib.auth.decorators import login_required, user_passes_test
-from Authentication_app. views import login, register
+from Authentication_app.views import login, register
 from django.db.models import Q
 
 
@@ -34,6 +34,37 @@ def homepage(request):
 # cart
 def cart(request):
     return render(request, 'cart.html')
+
+
+def add_to_cart(request):
+    if request.method == 'POST':
+        product_id = request.POST.get('product_id')
+        product = get_object_or_404(Product, id=product_id)
+
+        cart = request.session.get('cart', {})
+        if product_id in cart:
+            cart[product_id]['quantity'] += 1
+        else:
+            cart[product_id] = {
+                'name': product.name,
+                'price': str(product.price),
+                'quantity': 1
+            }
+
+        request.session['cart'] = cart
+        return redirect('cart')  # Přesměrování na stránku košíku
+    else:
+        return HttpResponseNotAllowed(['POST'])  # Zpracování neplatných metod
+
+
+def cart_view(request):
+    cart = request.session.get('cart', {})
+    total_price = 0
+
+    for item in cart.values():
+        total_price += float(item['price']) * item['quantity']
+
+    return render(request, 'cart.html', {'cart': cart, 'total_price': total_price})
 
 
 # user page

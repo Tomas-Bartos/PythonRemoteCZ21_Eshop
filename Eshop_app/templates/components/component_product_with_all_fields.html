@@ -6,5 +6,10 @@
     <div class="title">{{ product.name }}</div>
     <div class="description">{{ product.description|linebreaks }}</div>
     <div class="price mt-2">Cena: {{ product.price }} Kč</div>
-    <a class="btn btn-outline-secondary mt-3" href="#" role="button">Do košíku</a>
+    <p>ID produktu: {{ products.id }}</p>
+    <form action="{% url 'add_to_cart' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="product_id" value="{{ products.id }}">
+        <button type="submit">Přidat do košíku</button>
+    </form>
 </div>
