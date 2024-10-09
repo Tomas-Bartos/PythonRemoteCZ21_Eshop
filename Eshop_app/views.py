@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product, Category, User, Customer, Admin, Employee
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotAllowed
 from .forms import CategoryForm, ProductForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from Authentication_app.views import login, register
@@ -28,14 +28,11 @@ def cart(request):
 def add_to_cart(request):
     if request.method == 'POST':
         product_id = request.POST.get('product_id')
-        print('Přidávám produkt s ID:', product_id) #debug
         product = get_object_or_404(Product, id=product_id)
 
         cart = request.session.get('cart', {})
-        print("Obsah košíku před přidáním:", cart) #debug
         if product_id in cart:
             cart[product_id]['quantity'] += 1
-
         else:
             cart[product_id] = {
                 'name': product.name,
@@ -44,16 +41,19 @@ def add_to_cart(request):
             }
 
         request.session['cart'] = cart
-
-        print("Aktuální obsah košíku:", request.session['cart']) #debug
-
-        return redirect('cart')
+        return redirect('cart')  # Přesměrování na stránku košíku
+    else:
+        return HttpResponseNotAllowed(['POST'])  # Zpracování neplatných metod
 
 
 def cart_view(request):
     cart = request.session.get('cart', {})
-    print("Obsah košíku při zobrazení:", cart)  # Debug
-    return render(request, 'cart.html', {'cart': cart})
+    total_price = 0
+
+    for item in cart.values():
+        total_price += float(item['price']) * item['quantity']
+
+    return render(request, 'cart.html', {'cart': cart, 'total_price': total_price})
 
 
 # user page
@@ -110,19 +110,20 @@ def mrazene(request):
 
 
 # product detail
-def product_detail(request):
-    products = Product.objects.all()
-
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    print('ID produktu:', product.id)
+    print('Produkt:', product)
     if isinstance(request.user, Customer):
-        return render(request, 'customer/products.html', {'products': products})
+        return render(request, 'customer/products.html', {'product': product})
 
     elif isinstance(request.user, Employee):
-        return render(request, 'employee/products.html', {'products': products})
+        return render(request, 'employee/products.html', {'product': product})
 
     elif isinstance(request.user, Admin):
-        return render(request, 'admin/products.html', {'products': products})
+        return render(request, 'admin/products.html', {'product': product})
 
-    return render(request, 'public/products.html', {'products': products})
+    return render(request, 'product_detail.html', {'product': product})
 
 
 # Edit product form
