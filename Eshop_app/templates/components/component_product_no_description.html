@@ -1,7 +1,11 @@
 <div class="product">
     <div class="product-category mb-2">{{ product.category }}</div>
     <div class="img">
+        {% if not product.image %}
+        {{product.image}}
+        {% else %}
         <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% endif %}
     </div>
     <div class="title">{{ product.name }}</div>
     <div class="price mt-2">Cena: {{ product.price }} Kč</div>
