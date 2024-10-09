@@ -35,8 +35,11 @@ body .grid_auto_fill {
 body .container_inner {
   padding: 30px 0;
 }
-body .navbar-collapse {
-  justify-content: space-between;
+body [role=search] input {
+  border-radius: 0.375rem 0 0 0.375rem;
+}
+body [role=search] button {
+  border-radius: 0 0.375rem 0.375rem 0;
 }
 body .product {
   padding: 20px;

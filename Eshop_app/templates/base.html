@@ -56,48 +56,42 @@
                         <li><a class="dropdown-item" href="{% url 'mrazene' %}">Mražené</a></li>
                     </ul>
                 </li>
-                <!-- Login -->
-                <li class="nav-item dropdown">
+            </ul>
+            <!-- search -->
+            <ul class="navbar-nav mb-2 mb-lg-0 mx-auto">
+                <li class="nav-item">
+                    <form class="d-flex" role="search" method="get" action="{% url 'search_products' %}">
+                        <input class="form-control" type="search" name="q" placeholder="Hledat produkty"
+                               aria-label="Search">
+                        <button class="btn btn-success" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <!-- login -->
+                <li class="nav-item">
+                    {% if user.is_authenticated %}
+                <li class="nav-item dropdown me-5">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
-                        Přihlášení
+                        <i class="fa fa-user-o me-2" aria-hidden="true"></i><span>{{ user.username }}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'login' %}">Přihlásit</a></li>
                         <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="{% url 'register' %}">Registrovat</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="{% url 'user' %}">Účet</a></li>
+                            <a class="dropdown-item" href="{% url 'user' %}">Účet</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href="{% url 'logout' %}">Odhlásit se</a></li>
                     </ul>
                 </li>
-                <!-- <li class="nav-item"> -->
-                <!-- <a class="nav-link disabled" aria-disabled="true">Disabled</a>-->
-                <!-- </li>-->
-            </ul>
-            <ul class="navbar-nav mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <form class="d-flex" role="search" method="get" action="{% url 'search_products' %}">
-                        <input class="form-control me-2" type="search" name="q" placeholder="Hledat produkty"
-                               aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <div class="user_container">
-                        {% if user.is_authenticated %}
-                        <span>Přihlášen jako: {{ user.username }} {{ user.get_role }}</span>
-                        {% else %}
-                        <span>Nepřihlášený uživatel</span>
-                        {% endif %}
-                    </div>
+                {% else %}
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a type="button" href="{% url 'login' %}" class="btn btn-outline-primary">Přihlásit se</a>
+                    <a type="button" href="{% url 'register' %}" class="btn btn-outline-primary">Registrovat se</a>
+                </div>
+                {% endif %}
                 </li>
             </ul>
         </div>
