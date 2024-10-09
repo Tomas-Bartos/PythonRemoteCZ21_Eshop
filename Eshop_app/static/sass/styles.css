@@ -35,14 +35,17 @@ body .grid_auto_fill {
 body .container_inner {
   padding: 30px 0;
 }
-body [role=search] input {
+body .navbar [role=search] input {
   border-radius: 0.375rem 0 0 0.375rem;
 }
-body [role=search] button {
+body .navbar [role=search] button {
   border-radius: 0 0.375rem 0.375rem 0;
 }
-body .container-fluid {
+body .navbar .container-fluid {
   max-width: 1320px;
+}
+body .navbar .btn-group a:first-child {
+  border-right: 0;
 }
 body .product {
   padding: 20px;
