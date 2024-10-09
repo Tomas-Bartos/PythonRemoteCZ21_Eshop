@@ -80,8 +80,17 @@ body {
   // ** ↑↑ **
 
   // ** MENU **
-  .navbar-collapse {
-    justify-content: space-between;
+  [role="search"] {
+    input {
+      border-radius: .375rem 0 0 .375rem;
+    }
+    button {
+      border-radius: 0 .375rem .375rem 0;
+    }
+  }
+
+  .container-fluid {
+    max-width: 1320px;
   }
 
   // ** ↑↑ **
