@@ -3,7 +3,7 @@ from .models import Product, Category, User, Customer, Admin, Employee
 from django.http import HttpResponse
 from .forms import CategoryForm, ProductForm
 from django.contrib.auth.decorators import login_required, user_passes_test
-from Authentication_app. views import login, register
+from Authentication_app.views import login, register
 from django.db.models import Q
 
 
@@ -23,6 +23,37 @@ def homepage(request):
 # cart
 def cart(request):
     return render(request, 'cart.html')
+
+
+def add_to_cart(request):
+    if request.method == 'POST':
+        product_id = request.POST.get('product_id')
+        print('Přidávám produkt s ID:', product_id) #debug
+        product = get_object_or_404(Product, id=product_id)
+
+        cart = request.session.get('cart', {})
+        print("Obsah košíku před přidáním:", cart) #debug
+        if product_id in cart:
+            cart[product_id]['quantity'] += 1
+
+        else:
+            cart[product_id] = {
+                'name': product.name,
+                'price': str(product.price),
+                'quantity': 1
+            }
+
+        request.session['cart'] = cart
+
+        print("Aktuální obsah košíku:", request.session['cart']) #debug
+
+        return redirect('cart')
+
+
+def cart_view(request):
+    cart = request.session.get('cart', {})
+    print("Obsah košíku při zobrazení:", cart)  # Debug
+    return render(request, 'cart.html', {'cart': cart})
 
 
 # user page

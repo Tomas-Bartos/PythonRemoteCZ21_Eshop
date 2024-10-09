@@ -8,7 +8,7 @@ from django.views.generic import ListView, UpdateView
 # for example http://127.0.0.1:8000/Eshop_app/homepage/
 urlpatterns = [
     path('homepage/', views.homepage, name='homepage'),
-    path('cart/', views.cart, name='cart'),
+    path('cart/', views.cart_view, name='cart'),
     path('login/', views.login, name='login'),
     path('registrace/', views.register, name='register'),
     path('user/', views.user_page, name='user'),
@@ -30,4 +30,6 @@ urlpatterns = [
     path('product/<int:pk>/delete/', views.delete_product, name='delete_product'),
     # search
     path('search/', views.search_products, name='search_products'),
+    path('add_to_cart/', views.add_to_cart, name='add_to_cart'),
+    path('Eshop_app/homepage/', views.homepage, name='homepage'),
 ]
