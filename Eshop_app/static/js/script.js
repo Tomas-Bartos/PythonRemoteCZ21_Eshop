@@ -6,11 +6,13 @@ $(document).ready(function () {
     // Remove class inactive when focused
     $('#search-input').on('focus', function () {
         $(this).closest('#search-form').removeClass('inactive');
+        $('#suggestions').addClass('active');
     });
 
     // Add class inactive when out of focus
     $('#search-input').on('blur', function () {
         $(this).closest('#search-form').addClass('inactive');
+        $('#suggestions').removeClass('active');
     });
 
     // Define currentIndex outside of the event functions to ensure global scope within this document ready function
