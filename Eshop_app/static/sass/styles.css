@@ -94,13 +94,13 @@ body #suggestions li.active {
 body #suggestions li:hover {
   background-color: #f8f9fa;
 }
-body #suggestions .form_container {
+body .form_container {
   padding: 20px;
   border: 1px solid #e7e7e7;
   border-radius: 10px;
 }
 @media only screen and (min-width: 481px) {
-  body #suggestions .form_container {
+  body .form_container {
     min-width: 400px;
     width: fit-content;
   }

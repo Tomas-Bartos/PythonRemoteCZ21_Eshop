@@ -67,7 +67,6 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: $gap-big;
-    //margin: $margin-big 0;
   }
 
   // ** ↑↑ **
@@ -107,18 +106,6 @@ body {
   }
 
   // ** SEARCH **
-  //#search-form {
-  //  //transition: all .1s;
-  //
-  //  &.inactive {
-  //    #suggestions {
-  //      transition: all 100ms;
-  //      visibility: hidden;
-  //      //pointer-events: none;
-  //    }
-  //  }
-  //}
-
   .width_100 {
     max-width: 500px;
   }
@@ -166,9 +153,8 @@ body {
       }
     }
   }
-
-  #suggestions
     // ** ↑↑ **
+
     // ** FORM **
   .form_container {
     padding: $padding-medium;
