@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product, Category, User, Customer, Admin, Employee
-from django.http import HttpResponse, HttpResponseNotAllowed
+from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
 from .forms import CategoryForm, ProductForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from Authentication_app.views import login, register
 from django.db.models import Q
+from unidecode import unidecode
 
 
 # Create your views here.
@@ -237,3 +238,50 @@ def search_products(request):
         products = Product.objects.all()  # if not request get all products
 
     return render(request, 'search_results.html', {'products': products, 'query': query})
+
+
+# autocomplete search
+def product_autocomplete(request):
+    query = request.GET.get('term', '')  # get search term
+    results = []
+
+    if query:
+        # make searches lovercase and remove čřř ect.
+        normalized_query = unidecode(query).lower()
+        # search in products
+        products = Product.objects.all()
+        matching_products = [
+            product.name for product in products
+            if normalized_query in unidecode(product.name).lower()
+        ]
+        results.extend(matching_products[:10])
+
+        # search in categories
+        categories = Category.objects.all()
+        matching_categories = [
+            f"{category.name} (Kategorie)" for category in categories
+            if normalized_query in unidecode(category.name).lower()  # Convert category name to lowercase
+        ]
+        results.extend(matching_categories[:10])
+
+    return JsonResponse(results, safe=False)
+
+
+# autocomplete redirect
+def search_results(request):
+    query = request.GET.get('q', '')
+    products = []
+    categories = []
+
+    if query:
+        normalized_query = unidecode(query)
+
+        # search products and categories
+        products = Product.objects.filter(name__icontains=normalized_query)
+        categories = Category.objects.filter(name__icontains=normalized_query)
+
+    return render(request, 'search_results.html', {
+        'query': query,
+        'products': products,
+        'categories': categories
+    })

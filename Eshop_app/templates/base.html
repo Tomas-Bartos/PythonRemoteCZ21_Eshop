@@ -23,6 +23,8 @@
           rel="stylesheet">
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- local js -->
+    <script src="{% static 'js/script.js' %}"></script>
     <title>Base</title>
 </head>
 <body>
@@ -37,11 +39,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0">
-                <!-- Homepage -->
-                <!--                <li class="nav-item">-->
-                <!--                    <a class="nav-link active" aria-current="page" href="{% url 'homepage' %}">Domů</a>-->
-                <!--                </li>-->
-                <!-- Cart -->
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'cart' %}">Košík</a>
                 </li>
@@ -60,18 +57,19 @@
                 </li>
             </ul>
             <!-- search -->
-            <ul class="navbar-nav mb-2 mb-lg-0 mx-auto">
-                <li class="nav-item">
-                    <form class="d-flex" role="search" method="get" action="{% url 'search_products' %}">
-                        <input class="form-control" type="search" name="q" placeholder="Hledat produkty"
-                               aria-label="Search">
-                        <button class="btn btn-success" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
-                        </button>
-                    </form>
+            <ul class="navbar-nav mb-2 mb-lg-0 mx-auto width_100">
+                <li class="nav-item width_100">
+                    <div class="search_container">
+                        <form id="search-form" action="{% url 'search_products' %}" method="get" autocomplete="off">
+                            <input class="form-control search" type="text" id="search-input" name="q"
+                                   aria-label="Search" placeholder="Vyhledávání...">
+                            <ul id="suggestions"></ul>
+                        </form>
+                    </div>
                 </li>
             </ul>
+            <!-- login -->
             <ul class="navbar-nav mb-2 mb-lg-0">
-                <!-- login -->
                 <li class="nav-item">
                     {% if user.is_authenticated %}
                 <li class="nav-item dropdown me-5">
@@ -102,9 +100,7 @@
 
 <!-- content container -->
 <div class="container">
-    <div class="container_inner">
-        <div>{% block content %}{% endblock %}</div>
-    </div>
+    <div class="container_inner">{% block content %}{% endblock %}</div>
 </div>
 
 <!-- Footer -->

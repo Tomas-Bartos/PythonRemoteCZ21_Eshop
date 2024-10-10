@@ -77,6 +77,10 @@ body {
     padding: 30px 0;
   }
 
+  .width_100 {
+    width: 100%;
+  }
+
   // ** ↑↑ **
 
   // ** MENU **
@@ -99,6 +103,58 @@ body {
       a:first-child {
         border-right: 0;
       }
+    }
+  }
+
+  // ** SEARCH **
+  #search-form {
+    //transition: all .1s;
+
+    &.inactive {
+      #suggestions {
+        transition: all 100ms;
+        visibility: hidden;
+        //pointer-events: none;
+      }
+    }
+  }
+
+  .width_100 {
+    max-width: 500px;
+  }
+
+  #suggestions {
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    max-height: 800px;
+    overflow-y: auto;
+    position: absolute;
+    background-color: white;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    @media only screen and (min-width: 481px) {
+      max-width: 500px;
+    }
+    @media only screen and (max-width: 480px) {
+      max-width: calc(100vw - 25px);
+    }
+    z-index: 10;
+  }
+
+  #suggestions li {
+    padding: 8px;
+    cursor: pointer;
+
+    &.active {
+      background-color: #eee;
+
+    }
+
+    &:hover {
+      background-color: #eee;
+
     }
   }
 
@@ -128,7 +184,7 @@ body {
       }
 
       input {
-        &:not([type="checkbox"], [type="file"], [for="image-clear_id"], [type="number"]) {
+        &:not([type="checkbox"], [type="file"], [for="image-clear_id"], [type="number"], .search) {
           width: 100%;
           max-width: 500px;
         }
