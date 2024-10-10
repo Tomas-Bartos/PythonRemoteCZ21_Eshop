@@ -31,5 +31,9 @@ urlpatterns = [
     # search
     path('search/', views.search_products, name='search_products'),
     path('add_to_cart/', views.add_to_cart, name='add_to_cart'),
+    path('cart/remove/<int:product_id>/', views.remove_from_cart, name='remove_from_cart'),
     path('Eshop_app/homepage/', views.homepage, name='homepage'),
+    path('cart/complete/', views.complete_order, name='complete_order'),
+    path('order/form/', views.order_form, name='order_form'),
+    path('order/success/', views.order_success, name='order_success'),
 ]

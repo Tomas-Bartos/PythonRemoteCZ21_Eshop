@@ -55,6 +55,64 @@ def cart_view(request):
 
     return render(request, 'cart.html', {'cart': cart, 'total_price': total_price})
 
+def remove_from_cart(request, product_id):
+    cart = request.session.get('cart', {})
+    if product_id in cart:
+        del cart[product_id]
+        request.session['cart'] = cart
+    return redirect('cart_view')
+
+def complete_order(request):
+    if request.method == 'POST':
+        user = request.user
+        name = request.User.get_full_name()
+        email = request.User.email
+        address = request.User.address
+        phone = request.POST.get('phone')
+        payment_method = request.POST.get('payment_method')
+
+        cart = request.session.get('cart', {})
+
+        order = Order.objects.create(
+            user=request.user,
+            address=address,
+            phone=phone,
+            payment_method=payment_method,
+            total_amount=calculate_cart_total(cart),
+        )
+
+        for product_id, product_details in cart.items():
+            order.products.add(product_id)
+
+        request.session['cart'] = {}
+
+        return redirect('order_success')
+
+def order_form(request):
+    user = request.user
+
+
+    name = User.username if user else ''
+    street = User.address_street if user else ''
+    house_number = User.address_zip if user else ''
+    city = User.address_city if user else ''
+    postal_code = User.address_zip if user else ''
+    email = User.email if user else ''
+
+    context = {
+        'name': name,
+        'street': street,
+        'house_number': house_number,
+        'city': city,
+        'postal_code': postal_code,
+        'email': email,
+    }
+
+    return render(request, 'order_form.html', context)
+
+def order_success(request):
+    return render(request, 'order_success.html')
+
 
 # user page
 def user_page(request):

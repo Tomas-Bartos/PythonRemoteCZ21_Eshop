@@ -23,6 +23,7 @@ class User(models.Model):
     address_zip = models.CharField(max_length=20)
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
 
+
     def get_role(self):
         if hasattr(self, 'customer'):
             return 'Zákazník'

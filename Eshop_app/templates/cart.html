@@ -20,7 +20,9 @@
                 <td>{{ item.price }} Kč</td>
                 <td>{{ item.quantity }}</td>
                 <td>{{ item.price|floatformat:2|add:"0.00"|floatformat:2|add:"0.00"|floatformat:2 }}</td>
+                <td><a href="{% url 'remove_from_cart' product_id %}">Odebrat</a></td>
             </tr>
+
         {% empty %}
             <tr>
                 <td colspan="4">Vítejte v košíku. Naplňte si mě.</td>
@@ -30,5 +32,6 @@
 </table>
 
 <p>Celková cena: {{ total_price|floatformat:2 }} Kč</p>
+<a href="{% url 'order_form' %}" class="btn btn-primary" id="continue-btn">Pokračovat</a>
 
 {% endblock %}
