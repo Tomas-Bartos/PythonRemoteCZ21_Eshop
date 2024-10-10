@@ -3,12 +3,12 @@
 
 <!-- Add everything inside of block content to the page structure  -->
 {% block content %}
-<div class="product">
+<div class="form_container">
     <h5 class="main_header">Přidat nový produkt</h5>
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.as_div }}
         <button class="btn btn-primary" type="submit">Vytvořit produkt</button>
         <a href="{% url 'user' %}" class="btn btn-secondary">Zpět</a>
     </form>

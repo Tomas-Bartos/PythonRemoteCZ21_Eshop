@@ -47,6 +47,46 @@ body .navbar .container-fluid {
 body .navbar .btn-group a:first-child {
   border-right: 0;
 }
+body .form_container {
+  padding: 20px;
+  border: 1px solid #e7e7e7;
+  border-radius: 10px;
+}
+@media only screen and (min-width: 481px) {
+  body .form_container {
+    min-width: 400px;
+    width: fit-content;
+  }
+}
+body form:not(.d-flex) div {
+  margin: 10px 0 0 0;
+}
+body form:not(.d-flex) label:not([for=image-clear_id]) {
+  display: block;
+}
+body form:not(.d-flex) input:not([type=checkbox], [type=file], [for=image-clear_id], [type=number]) {
+  width: 100%;
+  max-width: 500px;
+}
+body form:not(.d-flex) input:is([type=checkbox]) {
+  margin-left: 10px;
+}
+body form:not(.d-flex) textarea {
+  width: 100%;
+  max-width: 500px;
+  max-height: 100px;
+}
+body form:not(.d-flex) select {
+  min-height: 27px;
+}
+body form:not(.d-flex) br {
+  display: block;
+  margin-top: 8px;
+  content: "";
+}
+body form:not(.d-flex) button, body form:not(.d-flex) a {
+  margin-top: 18px;
+}
 body .product {
   padding: 20px;
   border: 1px solid #e7e7e7;
@@ -69,11 +109,6 @@ body .product .description p {
 }
 body .product .price {
   font-weight: 700;
-}
-body .product input[type=text], body .product textarea {
-  width: 100%;
-  max-width: 500px;
-  max-height: 150px;
 }
 body .category_list {
   list-style: none;
