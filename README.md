@@ -11,23 +11,23 @@ Final Python projekt - E-shop
 
 
 - [ ] Modely:
-  - [ ] categories
-  - [ ] users
-  - [ ] products
+  - [x] categories
+  - [x] users
+  - [x] products
   - [ ] orders
   - [ ] vztahy mezi modely
-  - [ ] migrace
+  - [x] migrace
 
 
 - [ ] Autentizace uživatelů:
-  - [ ] funkčnost registrace
+  - [x] funkčnost registrace
   - [ ] formulář s validací (minimální požadavky na jméno a znaky hesla?)
-  - [ ] funkčnost odhlášení
+  - [x] funkčnost odhlášení
   - [ ] resetování a obnova hesla
 
 
 - [ ] Admin prostředí
-  - [ ] správa kategorií a produktů
+  - [x] správa kategorií a produktů
 
 
 - [ ] FrontEnd
