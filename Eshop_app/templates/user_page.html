@@ -1,0 +1,31 @@
+<!-- Add everything from the base.htm to this page -->
+{% extends "base.html" %}
+
+<!-- Add everything inside of block content to the page structure  -->
+{% block content %}
+
+<h1 class="main_header">Vítejte ve svém účtu</h1>
+
+
+<!-- create product -->
+{% if perms.Eshop_app.add_product %}
+<h5>Vytvořit produkt</h5>
+{% include 'components/component_create_product.html' %}
+{% endif %}
+
+<!-- edit product -->
+{% if perms.Eshop_app.change_product %}
+<h5>Editace produktů</h5>
+{% include 'components/component_edit_product.html' with product=product %}
+{% endif %}
+
+<!-- edit category -->
+{% if perms.Eshop_app.change_category %}
+<h5>Editace kategorií</h5>
+{% include 'components/component_category_list.html' with categories=categories %}
+{% endif %}
+
+
+{% endblock %}
+
+<!--<a class="btn btn-primary" href="{% url 'edit_product_page' %}" role="button">Editace produktů</a>-->

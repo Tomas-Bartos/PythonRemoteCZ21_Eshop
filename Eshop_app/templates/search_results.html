@@ -1,0 +1,10 @@
+<!-- Add everything from the base.htm to this page -->
+{% extends "base.html" %}
+
+<!-- Add everything inside of block content to the page structure  -->
+{% block content %}
+
+<!-- search -->
+{% include 'components/component_search_result.html' with products=products query=query %}
+
+{% endblock %}

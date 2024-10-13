@@ -4,6 +4,31 @@
 <!-- Add everything inside of block content to the page structure  -->
 {% block content %}
 
-<h1>Vítejte v košíku níže budou vámi vybrané produkty</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Název produktu</th>
+            <th>Cena</th>
+            <th>Množství</th>
+            <th>Celkem</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product_id, item in cart.items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price }} Kč</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price|floatformat:2|add:"0.00"|floatformat:2|add:"0.00"|floatformat:2 }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="4">Vítejte v košíku. Naplňte si mě.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p>Celková cena: {{ total_price|floatformat:2 }} Kč</p>
 
 {% endblock %}

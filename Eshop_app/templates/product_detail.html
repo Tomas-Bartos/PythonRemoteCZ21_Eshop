@@ -1,0 +1,27 @@
+<!-- Add everything from the base.htm to this page -->
+{% extends "base.html" %}
+
+<!-- Add everything inside of block content to the page structure  -->
+{% block content %}
+<h3>Produkt detail</h3>
+<div class="product-container grid_auto_fill">
+    <div class="product">
+        <div class="product-category mb-2">{{ product.category }}</div>
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
+        <div class="title">{{ product.name }}</div>
+        <div class="description">{{ product.description }}</div>
+        <div class="price mt-3">Cena: {{ product.price }} Kč</div>
+        <form action="{% url 'add_to_cart' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+            <button type="submit">Přidat do košíku</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+<!--    {% if user.is_authenticated and user.is_superuser %}-->
+<!--      <a href="{% url 'edit_product' product.pk %}" class="btn btn-warning">Editovat produkt</a>-->
+<!--    {% endif %}-->
+
+<!--http://127.0.0.1:8000/Eshop_app/product/1/-->

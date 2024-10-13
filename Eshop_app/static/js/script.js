@@ -1,0 +1,78 @@
+// ** Autocomplete search bar **
+$(document).ready(function () {
+    // Add class inactive
+    $('#search-input').closest('#search-form').addClass('inactive');
+
+    // Remove class inactive when focused
+    $('#search-input').on('focus', function () {
+        $(this).closest('#search-form').removeClass('inactive');
+        $('#suggestions').addClass('active');
+    });
+
+    // Add class inactive when out of focus
+    $('#search-input').on('blur', function () {
+        $(this).closest('#search-form').addClass('inactive');
+        $('#suggestions').removeClass('active');
+    });
+
+    // Define currentIndex outside of the event functions to ensure global scope within this document ready function
+    let currentIndex = -1;
+
+    // When the user types in the search input field
+    $('#search-input').on('input', function () {
+        let query = $(this).val(); // Get the current input value
+        currentIndex = -1;  // Reset the index when a new search is performed
+        if (query.length > 1) {
+            $.ajax({
+                url: '/Eshop_app/product-autocomplete/',
+                // Send the input as 'term' parameter
+                data: {term: query},
+                success: function (data) {
+                    // Clear any previous suggestions
+                    $('#suggestions').empty();
+                    // Iterate over the returned data and add each item to the suggestions list
+                    data.forEach(function (item) {
+                        // Append each item as a new list element
+                        $('#suggestions').append(`<li>${item}</li>`);
+                    });
+                }
+            });
+        } else {
+            $('#suggestions').empty();
+        }
+    });
+
+    // handle click on search suggestions
+    $('#suggestions').on('click', 'li', function () {
+        // remove (Kategorie) from url
+        let selectedQuery = $(this).text().replace(' (Kategorie)', '');
+        $('#search-input').val(selectedQuery);
+        $('#search-form').submit();
+    });
+
+    // Handle keydown for arrow keys and Enter
+    $('#search-input').on('keydown', function (e) {
+        let items = $('#suggestions li');
+        if (items.length === 0) return;
+
+        if (e.key === 'ArrowDown') {
+            currentIndex = (currentIndex + 1) % items.length;
+            updateActiveItem(items);
+        } else if (e.key === 'ArrowUp') {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            updateActiveItem(items);
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (currentIndex >= 0) {
+                $(items[currentIndex]).click();
+            }
+        }
+    });
+
+    // add and remove .active
+    function updateActiveItem(items) {
+        items.removeClass('active');
+        $(items[currentIndex]).addClass('active');
+    }
+});
+// ** Autocomplete search bar END **

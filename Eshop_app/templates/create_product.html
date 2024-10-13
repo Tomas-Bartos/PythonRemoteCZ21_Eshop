@@ -4,12 +4,13 @@
 <!-- Add everything inside of block content to the page structure  -->
 {% block content %}
 <div class="form_container">
-    <h5>Přihlášení</h5>
-    <form method="post">
+    <h5 class="main_header">Přidat nový produkt</h5>
+
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_div }}
-        <button class="btn btn-primary" type="submit">Přihlásit se</button>
-        <a class="btn btn-outline-secondary" href="{% url 'password_reset' %}">Zapomněl jsem heslo</a>
+        <button class="btn btn-primary" type="submit">Vytvořit produkt</button>
+        <a href="{% url 'user' %}" class="btn btn-secondary">Zpět</a>
     </form>
 </div>
 {% endblock %}

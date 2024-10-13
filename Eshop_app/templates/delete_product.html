@@ -1,0 +1,17 @@
+<!-- Add everything from the base.htm to this page -->
+{% extends "base.html" %}
+
+<!-- Add everything inside of block content to the page structure  -->
+{% block content %}
+
+<div class="product">
+    <h5>Bude smazán produkt: {{ product.name }}</h5>
+    <p class="sda_warning">Opravdu chcete smazat tento produkt? <b>Tuto operaci nelze vrátit!</b></p>
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit">Ano, smazat</button>
+        <a class="btn btn-secondary" href="{% url 'user' %}">Ne, jít zpět</a>
+    </form>
+</div>
+
+{% endblock %}

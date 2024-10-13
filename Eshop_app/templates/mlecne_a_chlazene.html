@@ -1,0 +1,18 @@
+<!-- Add everything from the base.htm to this page -->
+{% extends "base.html" %}
+
+<!-- Add everything inside of block content to the page structure  -->
+{% block content %}
+
+<h1 class="main_header">Mléčné a chlazené</h1>
+
+<!-- Container for products -->
+<div class="product-container grid_auto_fill">
+    <!-- For loop to show all products -->
+    {% for product in mlecne_chlazene %}
+        <!-- include product component -->
+        {% include 'components/component_product_with_all_fields.html' with product=product %}
+    {% endfor %}
+</div>
+
+{% endblock %}

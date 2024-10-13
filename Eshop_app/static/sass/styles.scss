@@ -1,11 +1,276 @@
 // About SASS https://sass-lang.com/guide/#variables
 
+// ** Fonts **
+$header: 'Noto Serif Oriya', serif;
+$paragraph: 'Quicksand', sans-serif;
+
 body {
   padding: 0;
   margin: 0;
-}
 
-h1 {
-  font-size: 40px;
-  text-align: center;
+
+  :not(h1, h2, h3, h4, h5, h6, .title, .fa) {
+    font-family: $paragraph;
+    font-size: 14px;
+  }
+
+  h1, h2, h3, h4, h5, h6, .title {
+    font-family: $header;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+
+  .sda_warning {
+    font-size: 16px;
+    font-weight: 500;
+    color: crimson;
+
+    b {
+      font-size: inherit;
+      font-weight: 700;
+    }
+  }
+
+  // ** ↑↑ **
+
+  // ** MARGIN **
+  $margin-small: 10px;
+  $margin-medium: 20px;
+  $margin-big: 40px;
+  // ** ↑↑ **
+
+  // ** PADDING **
+  $padding-small: 10px;
+  $padding-medium: 20px;
+  $padding-big: 40px;
+  // ** ↑↑ **
+
+  // ** FONTS **
+  h1 {
+    text-align: center;
+
+    &.main_header {
+      margin: $margin-big 0;
+    }
+  }
+
+  // ** GRID **
+  $gap-small: 5px;
+  $gap-medium: 10px;
+  $gap-big: 20px;
+
+  // Grid autofill container
+  .grid_auto_fill {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: $gap-big;
+  }
+
+  // ** ↑↑ **
+
+  // ** CONTAINERS **
+  .container_inner {
+    padding: 30px 0;
+  }
+
+  .width_100 {
+    width: 100%;
+  }
+
+  // ** ↑↑ **
+
+  // ** MENU **
+  .navbar {
+    [role="search"] {
+      input {
+        border-radius: .375rem 0 0 .375rem;
+      }
+
+      button {
+        border-radius: 0 .375rem .375rem 0;
+      }
+    }
+
+    .container-fluid {
+      max-width: 1320px;
+    }
+
+    .btn-group {
+      a:first-child {
+        border-right: 0;
+      }
+    }
+  }
+
+  // ** SEARCH **
+  .width_100 {
+    max-width: 500px;
+  }
+
+  #suggestions {
+    border-radius: 6px;
+    max-height: 800px;
+    overflow-y: auto;
+    position: absolute;
+    background-color: white;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    z-index: 10;
+
+    @media only screen and (min-width: 481px) {
+      max-width: 500px;
+    }
+    @media only screen and (max-width: 480px) {
+      max-width: calc(100vw - 25px);
+    }
+
+    li {
+      padding: 8px;
+      cursor: pointer;
+      border-left: 1px solid #dee2e6;
+      border-right: 1px solid #dee2e6;
+
+      &:first-child {
+        border-radius: 6px 6px 0 0;
+      }
+
+      &:last-child {
+        border-radius: 0 0 6px 6px;
+        border-bottom: 1px solid #dee2e6;
+      }
+
+      &.active {
+        background-color: #f8f9fa;
+      }
+
+      &:hover {
+        background-color: #f8f9fa;
+      }
+    }
+  }
+    // ** ↑↑ **
+
+    // ** FORM **
+  .form_container {
+    padding: $padding-medium;
+    border: 1px solid #e7e7e7;
+    border-radius: 10px;
+    @media only screen and (min-width: 481px) {
+      min-width: 400px;
+      width: fit-content;
+    }
+  }
+
+  form {
+    &:not(.d-flex) {
+      div {
+        margin: 10px 0 0 0;
+      }
+
+      label {
+        &:not([for="image-clear_id"]) {
+          display: block;
+        }
+      }
+
+      input {
+        &:not([type="checkbox"], [type="file"], [for="image-clear_id"], [type="number"], .search) {
+          width: 100%;
+          max-width: 500px;
+        }
+
+        &:is([type="checkbox"]) {
+          margin-left: 10px;
+        }
+      }
+
+      textarea {
+        width: 100%;
+        max-width: 500px;
+        max-height: 100px;
+      }
+
+      select {
+        min-height: 27px;
+      }
+
+      br {
+        display: block;
+        margin-top: 8px;
+        content: "";
+      }
+
+      button, a {
+        margin-top: 18px;
+      }
+    }
+  }
+
+  // ** ↑↑ **
+
+  // product card
+  .product {
+    padding: $padding-medium;
+    border: 1px solid #e7e7e7;
+    border-radius: 10px;
+
+    img {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 1;
+      color: #993300;
+      margin: $margin-small 0;
+    }
+
+    .description {
+      p {
+        margin: 0 0 5px 0;
+      }
+    }
+
+    .price {
+      font-weight: 700;
+    }
+  }
+
+  // category list
+  .category_list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 5px;
+      padding: 10px;
+
+      &:nth-child(odd) {
+        background-color: #f2f2f2;
+      }
+
+      div {
+        &:first-child {
+          font-size: 18px;
+          font-weight: 500;
+        }
+
+        &:nth-child(2) {
+          margin-left: auto;
+        }
+      }
+    }
+  }
 }

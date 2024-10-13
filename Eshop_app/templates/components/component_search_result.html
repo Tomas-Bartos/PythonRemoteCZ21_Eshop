@@ -1,0 +1,17 @@
+<h5>Výsledky hledání.</h5>
+{% if query %}
+<p>Hledaný výraz: <strong>{{ query }}</strong></p>
+{% endif %}
+
+<div class="product-container grid_auto_fill">
+    {% if products %}
+    {% for product in products %}
+
+    <!-- component_product_with_all_fields -->
+    {% include 'components/component_product_with_all_fields.html' with product=product %}
+
+    {% endfor %}
+    {% else %}
+    <p>Žádné produkty nebyly nalezeny.</p>
+    {% endif %}
+</div>
