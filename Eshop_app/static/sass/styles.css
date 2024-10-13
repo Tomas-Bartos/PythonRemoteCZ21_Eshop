@@ -179,5 +179,12 @@ body .category_list li div:first-child {
 body .category_list li div:nth-child(2) {
   margin-left: auto;
 }
+body .weather div {
+  margin: 0 0 6px 0;
+}
+body .weather div span {
+  font-weight: 500;
+  color: #993300;
+}
 
 /*# sourceMappingURL=styles.css.map */

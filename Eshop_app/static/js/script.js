@@ -76,3 +76,63 @@ $(document).ready(function () {
     }
 });
 // ** Autocomplete search bar END **
+
+
+// ** Weather widget **
+document.addEventListener("DOMContentLoaded", function () {
+    // register at https://openweathermap.org/ get API key
+    const apiKey = 'f4b0e35b03f1251b52af784a652c6435';
+
+    // get and display weather
+    function fetchWeather(lat, lon) {
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=cs&appid=${apiKey}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const temp = data.main.temp;
+                const feelsLike = data.main.feels_like;
+                const humidity = data.main.humidity;
+                const windSpeed = data.wind.speed;
+                const city = data.name;
+                const country = data.sys.country;
+                const pressure = data.main.pressure;
+
+                // insert data into the widget
+                const weatherDiv = document.getElementById('weather-widget');
+                weatherDiv.innerHTML = `
+                    <h6>Počasí pro ${city}, ${country}</h6><span></span>
+                    <div>Teplota: <span>${temp} °C</span></div>
+                    <div>Pocitová teplota: <span>${feelsLike} °C</span></div>
+                    <div>Vlhkost: <span>${humidity} %</span></div>
+                    <div>Tlak: <span>${pressure} hPa</span></div>
+                    <div>Rychlost větru: <span>${windSpeed} m/s</span></div>
+                `;
+            })
+            .catch(error => {
+                console.error('Chyba při načítání počasí:', error);
+                document.getElementById('weather-widget').innerText = 'Nepodařilo se načíst počasí.';
+            });
+    }
+
+    // get user geolocation
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function (position) {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                fetchWeather(lat, lon);
+            },
+            function (error) {
+                console.error('Chyba při získávání polohy:', error);
+                document.getElementById('weather-widget').innerText = 'Nepodařilo se získat polohu.';
+            }
+        );
+    } else {
+        document.getElementById('weather-widget').innerText = 'Geolokace není podporována.';
+    }
+});
+
+
+
+
+// ** Weather widget END **
