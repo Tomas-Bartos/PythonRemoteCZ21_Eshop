@@ -153,9 +153,10 @@ body {
       }
     }
   }
-    // ** ↑↑ **
 
-    // ** FORM **
+  // ** ↑↑ **
+
+  // ** FORM **
   .form_container {
     padding: $padding-medium;
     border: 1px solid #e7e7e7;
@@ -270,6 +271,17 @@ body {
         &:nth-child(2) {
           margin-left: auto;
         }
+      }
+    }
+  }
+
+  //  weather widget
+  .weather {
+    div {
+      margin: 0 0 6px 0;
+      span {
+        font-weight: 500;
+        color: #993300;
       }
     }
   }
