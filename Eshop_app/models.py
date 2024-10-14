@@ -14,13 +14,16 @@ class Category(models.Model):
 
 
 class User(models.Model):
-    username = models.CharField(max_length=100, unique=True, default="")
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=100)
-    address_country = models.CharField(max_length=100)
-    address_city = models.CharField(max_length=100)
-    address_street = models.CharField(max_length=100)
-    address_zip = models.CharField(max_length=20)
+    username = models.CharField(max_length=100, unique=True, default="Vyplňte prosím")
+    email = models.EmailField(unique=True, default="noemail@example.com")
+    password = models.CharField(max_length=100, default="Změna hesla")
+    first_name = models.CharField(max_length=100,  default="Vyplňte prosím")
+    last_name = models.CharField(max_length=100, verbose_name="Příjmení", default="Vyplňte prosím")
+    address_country = models.CharField(max_length=100, default="Vyplňte prosím")
+    address_city = models.CharField(max_length=100, default="Vyplňte prosím")
+    address_street = models.CharField(max_length=100, default="Vyplňte prosím")
+    address_number = models.CharField(max_length=10, verbose_name="Číslo popisné", default="Vyplňte prosím")
+    address_zip = models.CharField(max_length=5, default="Vyplňte prosím")
 
 
 class Customer(User):

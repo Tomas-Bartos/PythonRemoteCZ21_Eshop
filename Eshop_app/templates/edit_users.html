@@ -1,0 +1,16 @@
+<!-- Add everything from the base.htm to this page -->
+{% extends "base.html" %}
+
+<!-- Add everything inside of block content to the page structure  -->
+{% block content %}
+<h5 class="main_header">Upravit údaje uživatele: {{ user.username }}</h5>
+<div class="form_container">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_table }}
+        <button type="submit" class="btn btn-warning">Uložit změny</button>
+        <a href="{% url 'user' %}" class="btn btn-secondary">Zpět</a>
+    </form>
+</div>
+
+{% endblock %}

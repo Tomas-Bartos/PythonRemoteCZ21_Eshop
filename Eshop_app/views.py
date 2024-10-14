@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product, Category, User, Customer, Admin, Employee
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
-from .forms import CategoryForm, ProductForm
+from .forms import CategoryForm, ProductForm, UserEditForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from Authentication_app.views import login, register
 from django.db.models import Q
@@ -44,6 +44,35 @@ def user_page(request):
                       "products_to_edit": Product.objects.all(),
                       "categories": Category.objects.all(),
                   })
+
+
+# user account editing
+@login_required
+def edit_own_user(request):
+    user = request.user
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('user')  # return to
+    else:
+        form = UserEditForm(instance=user)
+    return render(request, 'edit_own_user.html', {'form': form})
+
+
+# edit all users
+@login_required
+@user_passes_test(is_employee_or_admin)
+def edit_users(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('user')  # return to
+    else:
+        form = UserEditForm(instance=user)
+    return render(request, 'edit_users.html', {'form': form, 'user': user})
 
 
 # cart

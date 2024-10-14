@@ -25,6 +25,8 @@
 {% include 'components/component_category_list.html' with categories=categories %}
 {% endif %}
 
+<!-- edit user/s -->
+<a href="{% url 'edit_own_user' %}" class="btn btn-primary">Editovat údaje</a>
 
 {% endblock %}
 

@@ -1,0 +1,15 @@
+<h5>Upravit své údaje</h5>
+<form method="post" action="{% url 'edit_own_user' %}">
+    {% csrf_token %}
+    {{ form.as_table }}
+    {{ form.username.label_tag }}{{ form.username }}
+    {{ form.first_name.label_tag }}{{ form.first_name }}
+    {{ form.last_name.label_tag }}{{ form.last_name }}
+    {{ form.email.label_tag }}{{ form.email }}
+    {{ form.address_country.label_tag }}{{ form.address_country }}
+    {{ form.address_city.label_tag }}{{ form.address_city }}
+    {{ form.address_street.label_tag }}{{ form.address_street }}
+    {{ form.address_number.label_tag }}{{ form.address_number }}
+    {{ form.address_zip.label_tag }}{{ form.address_zip }}
+    <button type="submit" class="btn btn-primary">Uložit změny</button>
+</form>

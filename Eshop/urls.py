@@ -27,4 +27,4 @@ urlpatterns = [
     path('Eshop_app/', include('Eshop_app.urls')),
     # include URLS from Authentication_app urls.py
     path('auth/', include('Authentication_app.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
