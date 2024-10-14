@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Product, Category, User, Customer, Admin, Employee
+from .models import Product, Category, User, Customer, Admin, Employee, Order
 from django.http import HttpResponse, HttpResponseNotAllowed
 from .forms import CategoryForm, ProductForm
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -19,18 +19,12 @@ def homepage(request):
                       "all_products": Product.objects.all()
                   })
 
-
-# cart
-def cart(request):
-    return render(request, 'cart.html')
-
-
 def add_to_cart(request):
     if request.method == 'POST':
         product_id = request.POST.get('product_id')
         product = get_object_or_404(Product, id=product_id)
 
-        cart = request.session.get('cart', {})
+        cart = request.session.get('cart_view', {})
         if product_id in cart:
             cart[product_id]['quantity'] += 1
         else:
@@ -40,53 +34,77 @@ def add_to_cart(request):
                 'quantity': 1
             }
 
-        request.session['cart'] = cart
-        return redirect('cart')  # Přesměrování na stránku košíku
+        request.session['cart_view'] = cart
+        return redirect('cart_view')  # Přesměrování na stránku košíku
     else:
         return HttpResponseNotAllowed(['POST'])  # Zpracování neplatných metod
 
 
 def cart_view(request):
-    cart = request.session.get('cart', {})
+    cart = request.session.get('cart_view', {})
     total_price = 0
 
     for item in cart.values():
         total_price += float(item['price']) * item['quantity']
 
-    return render(request, 'cart.html', {'cart': cart, 'total_price': total_price})
+    return render(request, 'cart_view.html', {'cart': cart, 'total_price': total_price})
+
 
 def remove_from_cart(request, product_id):
-    cart = request.session.get('cart', {})
-    if product_id in cart:
-        del cart[product_id]
-        request.session['cart'] = cart
+    cart = request.session.get('cart_view', {})
+    print(f'Obsah košíku před odebráním: {cart}')
+    if str(product_id) in cart:
+        del cart[str(product_id)]  # Odstraní celý produkt z košíku
+        print(f'Produkt {product_id} byl úspěšně odebrán z košíku.')  # Debug
+    else:
+        print(f'Produkt {product_id} nebyl nalezen v košíku.')  # Debug
+
+    request.session['cart_view'] = cart
     return redirect('cart_view')
+
+
+def calculate_cart_total(cart):
+    total = 0
+    for product_id, product_details in cart.items():
+        total += float(product_details['price']) * product_details['quantity']
+    return total
+
 
 def complete_order(request):
     if request.method == 'POST':
-        user = request.user
-        name = request.User.get_full_name()
-        email = request.User.email
-        address = request.User.address
-        phone = request.POST.get('phone')
-        payment_method = request.POST.get('payment_method')
+        if request.user.is_authenticated:
+            user = request.user
+            print(f"User: {user}, Type: {type(user)}")
 
-        cart = request.session.get('cart', {})
+            name = request.POST.get('name')
+            street = request.POST.get('street')
+            city = request.POST.get('city')
+            postal_code = request.POST.get('postal_code')
+            email = request.POST.get('email')
+            phone = request.POST.get('phone')
+            payment_method = request.POST.get('payment_method')
 
-        order = Order.objects.create(
-            user=request.user,
-            address=address,
-            phone=phone,
-            payment_method=payment_method,
-            total_amount=calculate_cart_total(cart),
-        )
+            cart = request.session.get('cart', {})
 
-        for product_id, product_details in cart.items():
-            order.products.add(product_id)
+            order = Order.objects.create(
+                user=user,
+                name=name,
+                street=street,
+                city=city,
+                postal_code=postal_code,
+                email=email,
+                phone=phone,
+                payment_method=payment_method,
+                total_amount=calculate_cart_total(cart),
+            )
 
-        request.session['cart'] = {}
+            for product_id, product_details in cart.items():
+                order.products.add(product_id)
 
-        return redirect('order_success')
+            request.session['cart'] = {}  # Clear the cart after completing the order
+            return redirect('order_success')  # Redirect to a success page
+
+    return redirect('order_success')
 
 def order_form(request):
     user = request.user

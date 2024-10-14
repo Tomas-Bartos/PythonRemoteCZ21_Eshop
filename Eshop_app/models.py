@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 
 
 # Models are like "data plans" or "templates" that determine what data is
@@ -13,15 +15,15 @@ class Category(models.Model):
         return self.name
 
 
-class User(models.Model):
+class User(AbstractUser):
     username = models.CharField(max_length=100, unique=True, default="")
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
-    address_country = models.CharField(max_length=100)
-    address_city = models.CharField(max_length=100)
-    address_street = models.CharField(max_length=100)
-    address_zip = models.CharField(max_length=20)
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    address_country = models.CharField(max_length=100, default="")
+    address_city = models.CharField(max_length=100, default="")
+    address_street = models.CharField(max_length=100, default="")
+    address_zip = models.CharField(max_length=20, default="")
+    avatar = models.ImageField(upload_to='avatars/', default="",null=True, blank=True)
 
 
     def get_role(self):
@@ -54,7 +56,13 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2)
-    delivery_address = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    street = models.CharField(max_length=255)
+    city = models.CharField(max_length=100)
+    postal_code = models.CharField(max_length=10)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    payment_method = models.CharField(max_length=50)
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
+
