@@ -10,3 +10,4 @@ __pycache__/
 *.py[cod]
 /.idea/dataSources.xml
 /.idea/watcherTasks.xml
+db.sqlite3
