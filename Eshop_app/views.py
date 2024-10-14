@@ -24,11 +24,25 @@ def is_admin(user):
     return user.groups.filter(name='Admin').exists()
 
 
+# checks if user is employee @user_passes_test(is_employee, login_url='/Eshop_app/user/')
+def is_employee(user):
+    return user.groups.filter(name='Employee').exists()  # add condition for user
+
+
 # This function will render homepage.html page
 def homepage(request):
     return render(request, 'homepage.html',
                   context={
                       "all_products": Product.objects.all()
+                  })
+
+
+# user page
+def user_page(request):
+    return render(request, 'user_page.html',
+                  context={
+                      "products_to_edit": Product.objects.all(),
+                      "categories": Category.objects.all(),
                   })
 
 
@@ -66,15 +80,6 @@ def cart_view(request):
         total_price += float(item['price']) * item['quantity']
 
     return render(request, 'cart.html', {'cart': cart, 'total_price': total_price})
-
-
-# user page
-def user_page(request):
-    return render(request, 'user_page.html',
-                  context={
-                      "products_to_edit": Product.objects.all(),
-                      "categories": Category.objects.all(),
-                  })
 
 
 # maso
@@ -128,10 +133,6 @@ def product_detail(request, pk):
 
 
 # Edit product form
-def is_employee(user):
-    return user.groups.filter(name='Employee').exists()  # add condition for user
-
-
 @login_required
 @user_passes_test(is_employee_or_admin, login_url='/Eshop_app/user/')
 def edit_product(request, pk):
@@ -246,12 +247,12 @@ def product_autocomplete(request):
     results = []
 
     if query:
-        # make searches lovercase and remove čřř ect.
         normalized_query = unidecode(query).lower()
         # search in products
         products = Product.objects.all()
         matching_products = [
             product.name for product in products
+            # make searches lovercase and remove čřř ect.
             if normalized_query in unidecode(product.name).lower()
         ]
         results.extend(matching_products[:10])
