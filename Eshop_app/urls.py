@@ -30,6 +30,9 @@ urlpatterns = [
     path('product/<int:pk>/delete/', views.delete_product, name='delete_product'),
     # search
     path('search/', views.search_products, name='search_products'),
+    path('product-autocomplete/', views.product_autocomplete, name='product_autocomplete'),
+    path('search/', views.search_results, name='search_results'),
+    # cart
     path('add_to_cart/', views.add_to_cart, name='add_to_cart'),
     path('cart_view/remove/<int:product_id>/', views.remove_from_cart, name='remove_from_cart'),
     path('Eshop_app/homepage/', views.homepage, name='homepage'),

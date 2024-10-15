@@ -2,7 +2,7 @@ body {
   padding: 0;
   margin: 0;
 }
-body :not(h1, h2, h3, h4, h5, h6, .title) {
+body :not(h1, h2, h3, h4, h5, h6, .title, .fa) {
   font-family: "Quicksand", sans-serif;
   font-size: 14px;
 }
@@ -35,6 +35,105 @@ body .grid_auto_fill {
 body .container_inner {
   padding: 30px 0;
 }
+body .width_100 {
+  width: 100%;
+}
+body .navbar [role=search] input {
+  border-radius: 0.375rem 0 0 0.375rem;
+}
+body .navbar [role=search] button {
+  border-radius: 0 0.375rem 0.375rem 0;
+}
+body .navbar .container-fluid {
+  max-width: 1320px;
+}
+body .navbar .btn-group a:first-child {
+  border-right: 0;
+}
+body .width_100 {
+  max-width: 500px;
+}
+body #suggestions {
+  border-radius: 6px;
+  max-height: 800px;
+  overflow-y: auto;
+  position: absolute;
+  background-color: white;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  z-index: 10;
+}
+@media only screen and (min-width: 481px) {
+  body #suggestions {
+    max-width: 500px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  body #suggestions {
+    max-width: calc(100vw - 25px);
+  }
+}
+body #suggestions li {
+  padding: 8px;
+  cursor: pointer;
+  border-left: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
+}
+body #suggestions li:first-child {
+  border-radius: 6px 6px 0 0;
+}
+body #suggestions li:last-child {
+  border-radius: 0 0 6px 6px;
+  border-bottom: 1px solid #dee2e6;
+}
+body #suggestions li.active {
+  background-color: #f8f9fa;
+}
+body #suggestions li:hover {
+  background-color: #f8f9fa;
+}
+body .form_container {
+  padding: 20px;
+  border: 1px solid #e7e7e7;
+  border-radius: 10px;
+}
+@media only screen and (min-width: 481px) {
+  body .form_container {
+    min-width: 400px;
+    width: fit-content;
+  }
+}
+body form:not(.d-flex) div {
+  margin: 10px 0 0 0;
+}
+body form:not(.d-flex) label:not([for=image-clear_id]) {
+  display: block;
+}
+body form:not(.d-flex) input:not([type=checkbox], [type=file], [for=image-clear_id], [type=number], .search) {
+  width: 100%;
+  max-width: 500px;
+}
+body form:not(.d-flex) input:is([type=checkbox]) {
+  margin-left: 10px;
+}
+body form:not(.d-flex) textarea {
+  width: 100%;
+  max-width: 500px;
+  max-height: 100px;
+}
+body form:not(.d-flex) select {
+  min-height: 27px;
+}
+body form:not(.d-flex) br {
+  display: block;
+  margin-top: 8px;
+  content: "";
+}
+body form:not(.d-flex) button, body form:not(.d-flex) a {
+  margin-top: 18px;
+}
 body .product {
   padding: 20px;
   border: 1px solid #e7e7e7;
@@ -58,11 +157,6 @@ body .product .description p {
 body .product .price {
   font-weight: 700;
 }
-body .product input[type=text], body .product textarea {
-  width: 100%;
-  max-width: 500px;
-  max-height: 150px;
-}
 body .category_list {
   list-style: none;
   padding: 0;
@@ -84,6 +178,13 @@ body .category_list li div:first-child {
 }
 body .category_list li div:nth-child(2) {
   margin-left: auto;
+}
+body .weather div {
+  margin: 0 0 6px 0;
+}
+body .weather div span {
+  font-weight: 700;
+  color: #993300;
 }
 
 /*# sourceMappingURL=styles.css.map */

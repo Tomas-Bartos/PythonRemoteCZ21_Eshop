@@ -18,8 +18,10 @@ from django.urls import path, include
 from Eshop_app.models import Product, Category
 from django.conf.urls.static import static
 from django.conf import settings
+from Eshop_app.views import homepage
 
 urlpatterns = [
+    path('', homepage),
     path('admin/', admin.site.urls),
     # include URLS from Eshop_app urls.py
     path('Eshop_app/', include('Eshop_app.urls')),

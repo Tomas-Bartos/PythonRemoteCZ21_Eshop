@@ -26,24 +26,29 @@ class User(AbstractUser):
     avatar = models.ImageField(upload_to='avatars/', default="",null=True, blank=True)
 
 
-    def get_role(self):
-        return 'Neznámá role'
-        if hasattr(self, 'customer'):
-            return 'Zákazník'
-        elif hasattr(self, 'employee'):
-            return 'Zaměstnanec'
-        elif hasattr(self, 'admin'):
-            return 'Admin'
-        return 'Neznámá role'
+    # def get_role(self):
+    # if hasattr(self, 'customer'):
+    #     return 'Zákazník'
+    # if hasattr(self, 'employee'):
+    #     return 'Zaměstnanec'
+    # elif hasattr(self, 'admin'):
+    #     return 'Admin'
+    # return 'Neznámá role'
+
 
 class Customer(User):
     pass
 
+
 class Employee(User):
-    is_admin = models.BooleanField(default=True)
+    # is_admin = models.BooleanField(default=True)
+    pass
+
 
 class Admin(User):
-    is_superadmin = models.BooleanField(default=True)
+    # is_superadmin = models.BooleanField(default=True)
+    pass
+
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
@@ -66,4 +71,3 @@ class Order(models.Model):
     phone = models.CharField(max_length=20, default="Česká Lípa")
     payment_method = models.CharField(max_length=50, default="Česká Lípa")
     total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=2)
-

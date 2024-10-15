@@ -5,17 +5,16 @@
 {% block content %}
 
 
-<div class="product">
+<div class="form_container">
     <h4>Editace produktu: {{ product.name }}</h4>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.as_div }}
         <button type="submit" class="btn btn-warning">Uložit změny</button>
         <!-- <a href="{% url 'product_detail' product.pk %}" class="btn btn-secondary">Zpět</a>-->
         <a href="{% url 'user' %}" class="btn btn-secondary">Zpět</a>
     </form>
 </div>
-
 
 {% endblock %}
 

@@ -3,13 +3,13 @@
 
 <!-- Add everything inside of block content to the page structure  -->
 {% block content %}
-
-    <h2>Přihlášení</h2>
+<div class="form_container">
+    <h5>Přihlášení</h5>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Přihlásit se</button>
-        <a href="{% url 'password_reset' %}">Zapomněl jsem heslo</a>
+        {{ form.as_div }}
+        <button class="btn btn-primary" type="submit">Přihlásit se</button>
+        <a class="btn btn-outline-secondary" href="{% url 'password_reset' %}">Zapomněl jsem heslo</a>
     </form>
-
+</div>
 {% endblock %}
