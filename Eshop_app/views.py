@@ -8,7 +8,6 @@ from .forms import CategoryForm, ProductForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from Authentication_app.views import login, register
 from django.db.models import Q
-from unidecode import unidecode
 
 
 # Create your views here.
