@@ -27,6 +27,7 @@ class User(AbstractUser):
 
 
     def get_role(self):
+        return 'Neznámá role'
         if hasattr(self, 'customer'):
             return 'Zákazník'
         elif hasattr(self, 'employee'):
@@ -57,12 +58,12 @@ class Product(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    street = models.CharField(max_length=255)
-    city = models.CharField(max_length=100)
-    postal_code = models.CharField(max_length=10)
-    email = models.EmailField()
-    phone = models.CharField(max_length=20)
-    payment_method = models.CharField(max_length=50)
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    name = models.CharField(max_length=100, default="Česká Lípa")
+    street = models.CharField(max_length=255, default="Česká Lípa")
+    city = models.CharField(max_length=100, default="Česká Lípa")
+    postal_code = models.CharField(max_length=10, default="Česká Lípa")
+    email = models.EmailField(default="info@info.cz")
+    phone = models.CharField(max_length=20, default="Česká Lípa")
+    payment_method = models.CharField(max_length=50, default="Česká Lípa")
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=2)
 

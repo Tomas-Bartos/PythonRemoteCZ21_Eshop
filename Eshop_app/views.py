@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Product, Category, User, Customer, Admin, Employee, Order
+from .models import Product, Category, User, Admin, Employee, Order
+#from .model import Customer
 from django.http import HttpResponse, HttpResponseNotAllowed
 from .forms import CategoryForm, ProductForm
 from django.contrib.auth.decorators import login_required, user_passes_test
