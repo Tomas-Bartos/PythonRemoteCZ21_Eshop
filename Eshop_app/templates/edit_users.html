@@ -3,14 +3,41 @@
 
 <!-- Add everything inside of block content to the page structure  -->
 {% block content %}
-<h5 class="main_header">Upravit údaje uživatele: {{ user.username }}</h5>
-<div class="form_container">
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_table }}
-        <button type="submit" class="btn btn-warning">Uložit změny</button>
-        <a href="{% url 'user' %}" class="btn btn-secondary">Zpět</a>
-    </form>
-</div>
+<h5 class="main_header">Seznam všech uživatelů</h5>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Uživatelské jméno</th>
+        <th>Jméno</th>
+        <th>Příjmení</th>
+        <th>E-mail</th>
+        <th>Země</th>
+        <th>Město</th>
+        <th>Ulice</th>
+        <th>Číslo popisné</th>
+        <th>PSČ</th>
+        <th>Akce</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+    <tr>
+        <td>{{ user.username }}</td>
+        <td>{{ user.first_name }}</td>
+        <td>{{ user.last_name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.address_country }}</td>
+        <td>{{ user.address_city }}</td>
+        <td>{{ user.address_street }}</td>
+        <td>{{ user.address_number }}</td>
+        <td>{{ user.address_zip }}</td>
+        <td>
+            <a href="{% url 'user' user.id %}" class="btn btn-primary btn-sm">Editovat</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
 
 {% endblock %}

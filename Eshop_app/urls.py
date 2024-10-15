@@ -13,7 +13,8 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('registrace/', views.register, name='register'),
     path('user/edit/', views.edit_own_user, name='edit_own_user'),
-    path('user/edit/<int:user_id>/', views.edit_users, name='edit_users'),
+    path('user/list/', views.user_list, name='user_list'),
+    path('user/edit/<int:user_id>/', views.edit_own_user, name='edit_own_user'),
     # category pages
     path('maso/', views.maso, name='maso'),
     path('ovoce/', views.ovoce, name='ovoce'),

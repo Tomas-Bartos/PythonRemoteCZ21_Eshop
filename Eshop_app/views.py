@@ -57,22 +57,32 @@ def edit_own_user(request):
             return redirect('user')  # return to
     else:
         form = UserEditForm(instance=user)
-    return render(request, 'edit_own_user.html', {'form': form})
+    return render(request, 'edit_own_user.html', {'form': form, 'users': user })
+
+
+# user list
+@login_required
+@user_passes_test(is_employee_or_admin)
+def user_list(request):
+    return render(request, 'edit_users.html',
+                  context={
+                      "users": Product.objects.all(),
+                  })
 
 
 # edit all users
 @login_required
 @user_passes_test(is_employee_or_admin)
-def edit_users(request, user_id):
-    user = get_object_or_404(User, pk=user_id)
+def edit_user(request, user_id):
+    user_to_edit = get_object_or_404(User, pk=user_id)
     if request.method == 'POST':
-        form = UserEditForm(request.POST, instance=user)
+        form = UserEditForm(request.POST, instance=user_to_edit)
         if form.is_valid():
             form.save()
-            return redirect('user')  # return to
+            return redirect('user_list')  # Přejde zpět na seznam všech uživatelů
     else:
-        form = UserEditForm(instance=user)
-    return render(request, 'edit_users.html', {'form': form, 'user': user})
+        form = UserEditForm(instance=user_to_edit)
+    return render(request, 'edit_user.html', {'form': form, 'user_to_edit': user_to_edit})
 
 
 # cart
