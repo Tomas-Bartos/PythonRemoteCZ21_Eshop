@@ -8,6 +8,7 @@ from .forms import CategoryForm, ProductForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from Authentication_app.views import login, register
 from django.db.models import Q
+from decimal import Decimal
 
 
 # Create your views here.
@@ -78,9 +79,11 @@ def remove_from_cart(request, product_id):
 
 
 def calculate_cart_total(cart):
-    total = 0
+    total = Decimal('0.00')
     for product_id, product_details in cart.items():
-        total += float(product_details['price']) * product_details['quantity']
+        price = Decimal(str(product_details['price']))
+        quantity = product_details['quantity']
+        total += price * quantity
     return total
 
 

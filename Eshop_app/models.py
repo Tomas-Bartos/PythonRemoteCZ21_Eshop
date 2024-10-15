@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from decimal import Decimal
 
 
 # Models are like "data plans" or "templates" that determine what data is
@@ -70,4 +71,4 @@ class Order(models.Model):
     email = models.EmailField(default="info@info.cz")
     phone = models.CharField(max_length=20, default="Česká Lípa")
     payment_method = models.CharField(max_length=50, default="Česká Lípa")
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=2)
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal('0.00'))
