@@ -11,3 +11,4 @@ __pycache__/
 /.idea/dataSources.xml
 /.idea/watcherTasks.xml
 db.sqlite3
+Eshop_app/static/sass/styles.css.map

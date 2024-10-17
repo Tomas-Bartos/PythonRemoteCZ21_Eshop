@@ -24,17 +24,7 @@ class User(AbstractUser):
     address_city = models.CharField(max_length=100, default="")
     address_street = models.CharField(max_length=100, default="")
     address_zip = models.CharField(max_length=20, default="")
-    avatar = models.ImageField(upload_to='avatars/', default="",null=True, blank=True)
-
-
-    # def get_role(self):
-    # if hasattr(self, 'customer'):
-    #     return 'Zákazník'
-    # if hasattr(self, 'employee'):
-    #     return 'Zaměstnanec'
-    # elif hasattr(self, 'admin'):
-    #     return 'Admin'
-    # return 'Neznámá role'
+    avatar = models.ImageField(upload_to='avatars/', default="", null=True, blank=True)
 
 
 class Customer(User):

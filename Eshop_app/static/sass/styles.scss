@@ -44,7 +44,7 @@ body {
 
   // ** PADDING **
   $padding-small: 10px;
-  $padding-medium: 20px;
+  $padding-medium: 25px;
   $padding-big: 40px;
   // ** ↑↑ **
 
@@ -165,9 +165,15 @@ body {
       min-width: 400px;
       width: fit-content;
     }
+
+    .btn-sm {
+      padding: 2px 5px 2px 5px;
+    }
   }
 
   form {
+    position: relative;
+
     &:not(.d-flex) {
       div {
         margin: 10px 0 0 0;
@@ -232,6 +238,7 @@ body {
       line-height: 1;
       color: #993300;
       margin: $margin-small 0;
+      min-height: 35px;
     }
 
     .description {
@@ -241,6 +248,16 @@ body {
     }
 
     .price {
+      font-weight: 700;
+    }
+
+    // product added to the cart
+    .cart_message {
+      position: absolute;
+      display: none;
+      color: #006b1b;
+      top: 43px;
+      font-size: 12px;
       font-weight: 700;
     }
   }
@@ -279,6 +296,7 @@ body {
   .weather {
     div {
       margin: 0 0 6px 0;
+
       span {
         font-weight: 700;
         color: #993300;

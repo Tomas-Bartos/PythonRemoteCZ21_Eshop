@@ -131,8 +131,42 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('weather-widget').innerText = 'Geolokace není podporována.';
     }
 });
-
-
-
-
 // ** Weather widget END **
+
+
+// product added to the cart
+$(document).ready(function () {
+    $('.add_to_cart_form').submit(function (event) {
+        event.preventDefault(); // prevent default form behavior
+
+        const $form = $(this); // Ulož odkaz na aktuální formulář
+        const productId = $form.find('input[name="product_id"]').val(); // Získá ID produktu z formuláře
+
+        $.ajax({
+            url: '/Eshop_app/add_to_cart/', // url for add to the cart
+            type: 'POST',
+            data: $(this).serialize(), // send all data from form
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}' // add CSRF token for django
+            },
+            success: function (response) {
+                // remove div with message if already exists
+                $form.find('.cart_message').remove();
+
+                // create div with mesage
+                const messageDiv = $('<div class="cart_message">' + response.message + '</div>');
+                $form.append(messageDiv);
+
+                // display message
+                messageDiv.slideDown().delay(1000).slideUp(function () {
+                    $(this).remove(); // remove after hiding the div
+                });
+            },
+            error: function (xhr, status, error) {
+                // alert("Nastala chyba: " + error); // error handler
+                console.log('chyba je:', error);
+            }
+        });
+    });
+});
+// ** product added to the cart END **

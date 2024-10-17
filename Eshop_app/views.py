@@ -1,14 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Product, Category, User, Admin, Employee, Order
-#from .model import Customer
-from django.http import HttpResponse, HttpResponseNotAllowed
-from .models import Product, Category, User, Customer, Admin, Employee
+from .models import Product, Category, User, Customer, Admin, Employee, Order
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
 from .forms import CategoryForm, ProductForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from Authentication_app.views import login, register
 from django.db.models import Q
 from decimal import Decimal
+from unidecode import unidecode
 
 
 # Create your views here.
@@ -33,120 +31,6 @@ def homepage(request):
                   context={
                       "all_products": Product.objects.all()
                   })
-
-def add_to_cart(request):
-    if request.method == 'POST':
-        product_id = request.POST.get('product_id')
-        product = get_object_or_404(Product, id=product_id)
-
-        cart = request.session.get('cart_view', {})
-        if product_id in cart:
-            cart[product_id]['quantity'] += 1
-        else:
-            cart[product_id] = {
-                'name': product.name,
-                'price': str(product.price),
-                'quantity': 1
-            }
-
-        request.session['cart_view'] = cart
-        return redirect('cart_view')  # Přesměrování na stránku košíku
-    else:
-        return HttpResponseNotAllowed(['POST'])  # Zpracování neplatných metod
-
-
-def cart_view(request):
-    cart = request.session.get('cart_view', {})
-    total_price = 0
-
-    for item in cart.values():
-        total_price += float(item['price']) * item['quantity']
-
-    return render(request, 'cart_view.html', {'cart': cart, 'total_price': total_price})
-
-
-def remove_from_cart(request, product_id):
-    cart = request.session.get('cart_view', {})
-    print(f'Obsah košíku před odebráním: {cart}')
-    if str(product_id) in cart:
-        del cart[str(product_id)]  # Odstraní celý produkt z košíku
-        print(f'Produkt {product_id} byl úspěšně odebrán z košíku.')  # Debug
-    else:
-        print(f'Produkt {product_id} nebyl nalezen v košíku.')  # Debug
-
-    request.session['cart_view'] = cart
-    return redirect('cart_view')
-
-
-def calculate_cart_total(cart):
-    total = Decimal('0.00')
-    for product_id, product_details in cart.items():
-        price = Decimal(str(product_details['price']))
-        quantity = product_details['quantity']
-        total += price * quantity
-    return total
-
-
-def complete_order(request):
-    if request.method == 'POST':
-        if request.user.is_authenticated:
-            user = request.user
-            print(f"User: {user}, Type: {type(user)}")
-
-            name = request.POST.get('name')
-            street = request.POST.get('street')
-            city = request.POST.get('city')
-            postal_code = request.POST.get('postal_code')
-            email = request.POST.get('email')
-            phone = request.POST.get('phone')
-            payment_method = request.POST.get('payment_method')
-
-            cart = request.session.get('cart', {})
-
-            order = Order.objects.create(
-                user=user,
-                name=name,
-                street=street,
-                city=city,
-                postal_code=postal_code,
-                email=email,
-                phone=phone,
-                payment_method=payment_method,
-                total_amount=calculate_cart_total(cart),
-            )
-
-            for product_id, product_details in cart.items():
-                order.products.add(product_id)
-
-            request.session['cart'] = {}  # Clear the cart after completing the order
-            return redirect('order_success')  # Redirect to a success page
-
-    return redirect('order_success')
-
-def order_form(request):
-    user = request.user
-
-
-    name = User.username if user else ''
-    street = User.address_street if user else ''
-    house_number = User.address_zip if user else ''
-    city = User.address_city if user else ''
-    postal_code = User.address_zip if user else ''
-    email = User.email if user else ''
-
-    context = {
-        'name': name,
-        'street': street,
-        'house_number': house_number,
-        'city': city,
-        'postal_code': postal_code,
-        'email': email,
-    }
-
-    return render(request, 'order_form.html', context)
-
-def order_success(request):
-    return render(request, 'order_success.html')
 
 
 # user page
@@ -368,3 +252,123 @@ def search_results(request):
         'products': products,
         'categories': categories
     })
+
+
+# orders
+def add_to_cart(request):
+    if request.method == 'POST':
+        product_id = request.POST.get('product_id')
+        product = get_object_or_404(Product, id=product_id)
+
+        cart = request.session.get('cart_view', {})
+        if product_id in cart:
+            cart[product_id]['quantity'] += 1
+        else:
+            cart[product_id] = {
+                'name': product.name,
+                'price': str(product.price),
+                'quantity': 1
+            }
+
+        request.session['cart_view'] = cart
+        # return redirect('cart_view')
+
+        # return JSON response
+        return JsonResponse({'message': 'Produkt přidán do košíku 🛒'})
+    else:
+        return HttpResponseNotAllowed(['POST'])  # Zpracování neplatných metod
+
+
+def cart_view(request):
+    cart = request.session.get('cart_view', {})
+    total_price = 0
+
+    for item in cart.values():
+        total_price += float(item['price']) * item['quantity']
+
+    return render(request, 'cart_view.html', {'cart': cart, 'total_price': total_price})
+
+
+def remove_from_cart(request, product_id):
+    cart = request.session.get('cart_view', {})
+    print(f'Obsah košíku před odebráním: {cart}')
+    if str(product_id) in cart:
+        del cart[str(product_id)]  # Odstraní celý produkt z košíku
+        print(f'Produkt {product_id} byl úspěšně odebrán z košíku.')  # Debug
+    else:
+        print(f'Produkt {product_id} nebyl nalezen v košíku.')  # Debug
+
+    request.session['cart_view'] = cart
+    return redirect('cart_view')
+
+
+def calculate_cart_total(cart):
+    total = Decimal('0.00')
+    for product_id, product_details in cart.items():
+        price = Decimal(str(product_details['price']))
+        quantity = product_details['quantity']
+        total += price * quantity
+    return total
+
+
+def complete_order(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            user = request.user
+            print(f"User: {user}, Type: {type(user)}")
+
+            name = request.POST.get('name')
+            street = request.POST.get('street')
+            city = request.POST.get('city')
+            postal_code = request.POST.get('postal_code')
+            email = request.POST.get('email')
+            phone = request.POST.get('phone')
+            payment_method = request.POST.get('payment_method')
+
+            cart = request.session.get('cart', {})
+
+            order = Order.objects.create(
+                user=user,
+                name=name,
+                street=street,
+                city=city,
+                postal_code=postal_code,
+                email=email,
+                phone=phone,
+                payment_method=payment_method,
+                total_amount=calculate_cart_total(cart),
+            )
+
+            for product_id, product_details in cart.items():
+                order.products.add(product_id)
+
+            request.session['cart'] = {}  # Clear the cart after completing the order
+            return redirect('order_success')  # Redirect to a success page
+
+    return redirect('order_success')
+
+
+def order_form(request):
+    user = request.user
+
+    name = User.username if user else ''
+    street = User.address_street if user else ''
+    house_number = User.address_zip if user else ''
+    city = User.address_city if user else ''
+    postal_code = User.address_zip if user else ''
+    email = User.email if user else ''
+
+    context = {
+        'name': name,
+        'street': street,
+        'house_number': house_number,
+        'city': city,
+        'postal_code': postal_code,
+        'email': email,
+    }
+
+    return render(request, 'order_form.html', context)
+
+
+def order_success(request):
+    return render(request, 'order_success.html')
