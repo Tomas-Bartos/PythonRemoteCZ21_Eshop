@@ -17,6 +17,7 @@ urlpatterns = [
     path('ovoce/', views.ovoce, name='ovoce'),
     path('mlecne-a-chlazene/', views.mlecne_a_chlazene, name='mlecne-a-chlazene'),
     path('mrazene/', views.mrazene, name='mrazene'),
+    path('zelenina/', views.zelenina, name='zelenina'),
     # category manipulation
     path('categories/', views.category_list, name='category_list'),
     path('categories/create/', views.category_create, name='category_create'),

@@ -42,50 +42,6 @@ def user_page(request):
                   })
 
 
-# maso
-def maso(request):
-    # Get all products from category
-    maso_category = get_object_or_404(Category, id=2)
-    maso_products = Product.objects.filter(category=maso_category)
-
-    return render(request, 'maso.html', context={
-        "maso": maso_products
-    })
-
-
-# mlecne a chlazene
-def mlecne_a_chlazene(request):
-    # Get all products from category
-    mlecne_chlazene_category = get_object_or_404(Category, id=3)
-    mlecne_chlazene_products = Product.objects.filter(category=mlecne_chlazene_category)
-
-    return render(request, 'mlecne_a_chlazene.html', context={
-        "mlecne_chlazene": mlecne_chlazene_products
-    })
-
-
-# ovoce
-def ovoce(request):
-    # Get all products from category
-    ovoce_category = get_object_or_404(Category, id=1)
-    ovoce_products = Product.objects.filter(category=ovoce_category)
-
-    return render(request, 'ovoce.html', context={
-        "ovoce": ovoce_products
-    })
-
-
-# mrazene
-def mrazene(request):
-    # Get all products from category
-    mrazene_category = get_object_or_404(Category, id=4)
-    mrazene_products = Product.objects.filter(category=mrazene_category)
-
-    return render(request, 'mrazene.html', context={
-        "mrazene": mrazene_products
-    })
-
-
 # product detail
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
@@ -191,6 +147,59 @@ def category_delete(request, pk):
         return redirect('user')
     return render(request, 'category_confirm_delete.html', {'category': category})
 
+
+# maso
+def maso(request):
+    # Get all products from category
+    maso_category = get_object_or_404(Category, id=1)
+    maso_products = Product.objects.filter(category=maso_category)
+
+    return render(request, 'maso.html', context={
+        "maso": maso_products
+    })
+
+
+# mlecne a chlazene
+def mlecne_a_chlazene(request):
+    # Get all products from category
+    mlecne_chlazene_category = get_object_or_404(Category, id=3)
+    mlecne_chlazene_products = Product.objects.filter(category=mlecne_chlazene_category)
+
+    return render(request, 'mlecne_a_chlazene.html', context={
+        "mlecne_chlazene": mlecne_chlazene_products
+    })
+
+
+# ovoce
+def ovoce(request):
+    # Get all products from category
+    ovoce_category = get_object_or_404(Category, id=2)
+    ovoce_products = Product.objects.filter(category=ovoce_category)
+
+    return render(request, 'ovoce.html', context={
+        "ovoce": ovoce_products
+    })
+
+
+# mrazene
+def mrazene(request):
+    # Get all products from category
+    mrazene_category = get_object_or_404(Category, id=4)
+    mrazene_products = Product.objects.filter(category=mrazene_category)
+
+    return render(request, 'mrazene.html', context={
+        "mrazene": mrazene_products
+    })
+
+# zelenina
+def zelenina(request):
+    # Get all products from category
+    zelenina_category = get_object_or_404(Category, id=5)
+    zelenina_products = Product.objects.filter(category=zelenina_category)
+
+    return render(request, 'zelenina.html', context={
+        "zelenina": zelenina_products
+    })
 
 # search
 def search_products(request):
